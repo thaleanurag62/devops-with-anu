@@ -3,75 +3,214 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevOps with Anu</title>
+<title>DevOps with Anu | Learn Linux & DevOps Free</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-    background:#f5f7fb;
+background:#f6f9ff;
+color:#222;
 }
 
-header{
-    background:#1E3A8A;
-    color:white;
-    text-align:center;
-    padding:70px 20px;
+nav{
+position:sticky;
+top:0;
+background:#ffffff;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 8%;
+box-shadow:0 2px 15px rgba(0,0,0,.08);
+z-index:1000;
 }
 
-header h1{
-    font-size:45px;
+.logo{
+font-size:28px;
+font-weight:700;
+color:#1E3A8A;
 }
 
-header p{
-    margin-top:10px;
-    font-size:20px;
+nav ul{
+display:flex;
+list-style:none;
+gap:35px;
 }
 
-.container{
-    display:flex;
-    justify-content:center;
-    margin-top:80px;
+nav ul li a{
+text-decoration:none;
+color:#333;
+font-weight:500;
+transition:.3s;
 }
 
-.folder{
-    width:300px;
-    text-align:center;
-    background:white;
-    padding:35px;
-    border-radius:20px;
-    text-decoration:none;
-    color:#222;
-    font-size:30px;
-    font-weight:bold;
-    box-shadow:0 10px 25px rgba(0,0,0,0.12);
-    transition:.3s;
+nav ul li a:hover{
+color:#2563eb;
 }
 
-.folder:hover{
-    transform:translateY(-8px);
-    background:#E8F0FF;
+.hero{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:80px 8%;
+gap:50px;
+flex-wrap:wrap;
 }
 
-footer{
-    text-align:center;
-    margin-top:120px;
-    color:#666;
-    padding:30px;
+.hero-text{
+flex:1;
+min-width:320px;
 }
-</style>
-<style>
-...
+
+.hero-text h1{
+font-size:55px;
+line-height:1.2;
+color:#1E3A8A;
+margin-bottom:20px;
+}
+
+.hero-text p{
+font-size:19px;
+line-height:1.8;
+color:#555;
+margin-bottom:35px;
+}
+
+.button{
+display:inline-block;
+padding:16px 35px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:10px;
+font-weight:600;
+transition:.3s;
+}
+
+.button:hover{
+background:#1d4ed8;
+transform:translateY(-3px);
+}
+
+.hero-image{
+flex:1;
+text-align:center;
+min-width:300px;
+}
+
+.hero-image img{
+width:100%;
+max-width:500px;
+}
+
+.section-title{
+text-align:center;
+font-size:38px;
+color:#1E3A8A;
+margin-top:70px;
+margin-bottom:45px;
+}
+
+.folder-section{
+padding:20px 8% 70px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
+}
+
+.card{
+background:#fff;
+border-radius:20px;
+padding:35px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:140px;
+margin-bottom:25px;
+}
+
+.card h3{
+font-size:28px;
+margin-bottom:15px;
+color:#1E3A8A;
+}
+
+.card p{
+color:#666;
+line-height:1.7;
+margin-bottom:25px;
+}
+
+.card a{
+display:inline-block;
+padding:14px 28px;
+background:#2563eb;
+color:#fff;
+text-decoration:none;
+border-radius:8px;
+font-weight:600;
+}
+
+.card a:hover{
+background:#1d4ed8;
+}
+
+@media(max-width:768px){
+
+nav{
+flex-direction:column;
+gap:15px;
+}
+
+nav ul{
+gap:18px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero{
+padding-top:40px;
+}
+
+.hero-text h1{
+font-size:38px;
+text-align:center;
+}
+
+.hero-text p{
+text-align:center;
+}
+
+.hero-text{
+text-align:center;
+}
+
+}
+
 </style>
 
 <!-- Google Analytics -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS0N4L0WKV"></script>
+
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
@@ -84,55 +223,84 @@ gtag('config', 'G-SS0N4L0WKV');
 
 <body>
 
-<header>
+<nav>
 
-<header>
+<div class="logo">
+🚀 DevOps with Anu
+</div>
 
-<h1>🚀 DevOps with Anu</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="linux.html">Linux</a></li>
+<li><a href="python.html">Python</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
 
-<p>Learn Linux & DevOps with free notes, PDFs, roadmaps and interview resources.</p>
+</nav>
 
-<br><br>
+<section class="hero">
 
-<a href="linux.html" style="background:white;color:#1E3A8A;padding:15px 30px;border-radius:8px;text-decoration:none;font-weight:bold;">
+<div class="hero-text">
+
+<h1>Learn Linux & DevOps for Free</h1>
+
+<p>
+Master Linux with beginner-friendly notes,
+roadmaps, interview questions and downloadable PDFs.
+Everything is completely free and regularly updated.
+</p>
+
+<a href="linux.html" class="button">
 📚 Explore Linux Notes
-</a>
-
-</header>
-<div class="container">
-
-<a href="linux.html" class="folder">
-🐧 Linux
 </a>
 
 </div>
 
-<section style="max-width:900px;margin:60px auto;background:white;padding:40px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,0.1);">
+<div class="hero-image">
 
-<h2 style="text-align:center;color:#1E3A8A;">Why Choose This Website?</h2>
+<img src="images/hero.png" alt="Linux Hero">
 
-<br>
-
-<p>✅ Free Linux Notes</p>
-<br>
-
-<p>✅ Easy to Understand</p>
-<br>
-
-<p>✅ Downloadable PDFs</p>
-<br>
-
-<p>✅ Beginner Friendly</p>
-<br>
-
-<p>✅ Regularly Updated Content</p>
+</div>
 
 </section>
 
-<footer>
-Made with ❤️ by DevOps with Anu
+<h2 class="section-title">
+Learning Folders
+</h2>
 
-</footer>
+<section class="folder-section">
 
-</body>
-</html>
+<div class="card">
+
+<img src="images/linux.png" alt="Linux">
+
+<h3>🐧 Linux</h3>
+
+<p>
+Complete Linux notes, commands, PDFs,
+roadmaps and interview preparation.
+</p>
+
+<a href="linux.html">
+Open Folder
+</a>
+
+</div>
+
+<div class="card">
+
+<img src="images/python.png" alt="Python">
+
+<h3>🐍 Python</h3>
+
+<p>
+Python tutorials and projects are
+coming soon. Stay tuned.
+</p>
+
+<a href="python.html">
+Open Folder
+</a>
+
+</div>
