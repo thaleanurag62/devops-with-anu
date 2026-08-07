@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>100 Linux Commands Every Beginner Should Know | DevOps with Anu</title>
+
+<meta name="description" content="Learn the most important Linux commands with syntax, examples and explanations. Beginner friendly Linux command reference.">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fc;
+    color:#333;
+    line-height:1.8;
+}
+
+header{
+    background:#1E3A8A;
+    color:white;
+    text-align:center;
+    padding:45px 20px;
+}
+
+.container{
+    max-width:950px;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#1E3A8A;
+    margin-top:40px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th{
+    background:#1E3A8A;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+tr:nth-child(even){
+    background:#f8f8f8;
+}
+
+.toc{
+    background:#eef4ff;
+    border-left:5px solid #1E3A8A;
+    padding:20px;
+    margin:30px 0;
+}
+
+code{
+    background:#efefef;
+    padding:3px 6px;
+    border-radius:4px;
+}
+
+.note{
+    background:#fff7d6;
+    padding:15px;
+    border-left:5px solid orange;
+    margin:25px 0;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>100 Linux Commands Every Beginner Should Know</h1>
+
+<p>DevOps with Anu</p>
+
+</header>
+
+<div class="container">
+
+<h2>Introduction</h2>
+
+<p>
+Linux commands are instructions typed into the terminal to interact with the operating system.
+Learning Linux commands is one of the most important skills for anyone interested in DevOps,
+Cloud Computing, Cyber Security, System Administration or Software Development.
+</p>
+
+<p>
+In this guide you will learn the most useful Linux commands with syntax,
+examples and explanations.
+</p>
+
+<div class="toc">
+
+<h2>Table of Contents</h2>
+
+<ul>
+<li>Navigation Commands</li>
+<li>File Commands</li>
+<li>Directory Commands</li>
+<li>Search Commands</li>
+<li>Permission Commands</li>
+<li>User Management Commands</li>
+<li>Process Commands</li>
+<li>Networking Commands</li>
+<li>Package Management Commands</li>
+<li>System Information Commands</li>
+
+</ul>
+
+</div>
+
+<div class="note">
+
+<strong>Tip:</strong>
+
+Practice every command in a Linux terminal instead of only reading about it.
+
+</div>
+
+<h2>Navigation Commands (1–10)</h2>
+
+<table>
+
+<tr>
+<th>No.</th>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td><code>pwd</code></td>
+<td>Shows current working directory.</td>
+<td>pwd</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td><code>ls</code></td>
+<td>Lists files and folders.</td>
+<td>ls</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td><code>ls -l</code></td>
+<td>Detailed file listing.</td>
+<td>ls -l</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td><code>ls -a</code></td>
+<td>Shows hidden files.</td>
+<td>ls -a</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td><code>cd</code></td>
+<td>Changes directory.</td>
+<td>cd Documents</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td><code>cd ..</code></td>
+<td>Go one folder back.</td>
+<td>cd ..</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td><code>cd ~</code></td>
+<td>Go to Home directory.</td>
+<td>cd ~</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td><code>tree</code></td>
+<td>Displays folder structure.</td>
+<td>tree</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td><code>clear</code></td>
+<td>Clears terminal screen.</td>
+<td>clear</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td><code>history</code></td>
+<td>Shows previous commands.</td>
+<td>history</td>
+</tr>
+
+</table>
+
+<h2>File Commands (11–25)</h2>
+
+<table>
+
+<tr>
+<th>No.</th>
+<th>Command</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+
+<tr>
+<td>11</td>
+<td><code>touch</code></td>
+<td>Create a new file.</td>
+<td>touch file.txt</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td><code>cat</code></td>
+<td>Display file contents.</td>
+<td>cat file.txt</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td><code>nano</code></td>
+<td>Edit a file.</td>
+<td>nano file.txt</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td><code>vim</code></td>
+<td>Open Vim editor.</td>
+<td>vim file.txt</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td><code>cp</code></td>
+<td>Copy files.</td>
+<td>cp a.txt b.txt</td>
+</tr>
+
+<tr>
+<td>16</td>
+<td><code>mv</code></td>
+<td>Move or rename files.</td>
+<td>mv file.txt new.txt</td>
+</tr>
+
+<tr>
+<td>17</td>
+<td><code>rm</code></td>
+<td>Delete file.</td>
+<td>rm file.txt</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td><code>rm -r</code></td>
+<td>Delete folder.</td>
+<td>rm -r folder</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td><code>head</code></td>
+<td>Show first 10 lines.</td>
+<td>head file.txt</td>
+</tr>
+
+<tr>
+<td>20</td>
+<td><code>tail</code></td>
+<td>Show last 10 lines.</td>
+<td>tail file.txt</td>
+</tr>
+
+<tr>
+<td>21</td>
+<td><code>more</code></td>
+<td>View file page by page.</td>
+<td>more file.txt</td>
+</tr>
+
+<tr>
+<td>22</td>
+<td><code>less</code></td>
+<td>Scrollable file viewer.</td>
+<td>less file.txt</td>
+</tr>
+
+<tr>
+<td>23</td>
+<td><code>wc</code></td>
+<td>Count lines, words and characters.</td>
+<td>wc file.txt</td>
+</tr>
+
+<tr>
+<td>24</td>
+<td><code>sort</code></td>
+<td>Sort file contents.</td>
+<td>sort file.txt</td>
+</tr>
+
+<tr>
+<td>25</td>
+<td><code>uniq</code></td>
+<td>Remove duplicate lines.</td>
+<td>uniq file.txt</td>
+</tr>
+
+</table>
+
+<p style="text-align:center;font-size:18px;margin-top:40px;">
+<strong>👇 Part 2 continues with Commands 26–50.</strong>
+</p>
+
+</div>
+
+</body>
+</html>
