@@ -1,33 +1,282 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>What is Linux?</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>What is Linux? Complete Beginner's Guide | DevOps with Anu</title>
+
+<meta name="description" content="Learn what Linux is, its features, advantages, disadvantages, distributions, commands, and why Linux is widely used by developers and companies.">
+
+<style>
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    line-height:1.8;
+    color:#333;
+}
+
+header{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h1,h2,h3{
+    color:#0b5ed7;
+}
+
+.toc{
+    background:#eef5ff;
+    padding:20px;
+    border-left:5px solid #0b5ed7;
+    margin:25px 0;
+}
+
+.toc a{
+    text-decoration:none;
+    color:#0b5ed7;
+}
+
+.download{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#0b5ed7;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+}
+
+.download:hover{
+    background:#084db3;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:#222;
+    color:white;
+    margin-top:40px;
+}
+</style>
+
 </head>
+
 <body>
 
+<header>
 <h1>What is Linux?</h1>
+<p>Complete Beginner's Guide</p>
+</header>
+
+<div class="container">
+
+<div class="toc">
+<h2>Table of Contents</h2>
+
+<ol>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#advantages">Advantages</a></li>
+<li><a href="#disadvantages">Disadvantages</a></li>
+<li><a href="#distributions">Popular Linux Distributions</a></li>
+<li><a href="#commands">Basic Linux Commands</a></li>
+<li><a href="#uses">Applications of Linux</a></li>
+<li><a href="#faq">Frequently Asked Questions</a></li>
+</ol>
+
+</div>
+
+<h2 id="intro">Introduction</h2>
 
 <p>
-Linux is a free and open-source operating system used on servers,
-computers, mobile devices, and embedded systems.
-It is known for its security, speed, and stability.
+Linux is a free and open-source operating system created by Linus Torvalds in 1991.
+Today it powers millions of servers, cloud platforms, Android devices, supercomputers,
+embedded systems, and desktop computers around the world.
 </p>
 
-<h2>Features of Linux</h2>
+<p>
+Unlike proprietary operating systems, Linux allows anyone to view, modify, and distribute
+its source code. This flexibility has made Linux one of the most popular operating systems
+for developers, system administrators, and DevOps engineers.
+</p>
+
+<h2 id="features">Features of Linux</h2>
 
 <ul>
-    <li>Open Source</li>
-    <li>Secure</li>
-    <li>Fast</li>
-    <li>Multi-user</li>
-    <li>Command Line Support</li>
+<li>Free and Open Source</li>
+<li>Fast Performance</li>
+<li>Highly Secure</li>
+<li>Multi-user Support</li>
+<li>Multitasking Operating System</li>
+<li>Powerful Command Line</li>
+<li>Supports Programming Languages</li>
+<li>Stable and Reliable</li>
+<li>Large Community Support</li>
+<li>Highly Customizable</li>
 </ul>
 
-<h2>Download Notes</h2>
+<h2 id="advantages">Advantages of Linux</h2>
 
-<a href="../Linux_Roadmap_20_Days.pdf">
-Download Linux PDF
+<ul>
+<li>No license cost.</li>
+<li>Excellent security.</li>
+<li>Runs smoothly even on older hardware.</li>
+<li>Very stable for servers.</li>
+<li>Supports automation using shell scripts.</li>
+<li>Ideal for cloud computing and DevOps.</li>
+<li>Large software repository.</li>
+</ul>
+
+<h2 id="disadvantages">Disadvantages of Linux</h2>
+
+<ul>
+<li>Some commercial software is unavailable.</li>
+<li>Gaming support is improving but not perfect.</li>
+<li>Learning terminal commands takes time.</li>
+<li>Some hardware drivers may require extra setup.</li>
+</ul>
+
+<h2 id="distributions">Popular Linux Distributions</h2>
+
+<ul>
+<li>Ubuntu</li>
+<li>Debian</li>
+<li>Fedora</li>
+<li>Arch Linux</li>
+<li>Linux Mint</li>
+<li>Kali Linux</li>
+<li>Rocky Linux</li>
+<li>CentOS Stream</li>
+</ul>
+
+<h2 id="commands">Basic Linux Commands</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+
+<tr>
+<td>pwd</td>
+<td>Shows current directory</td>
+</tr>
+
+<tr>
+<td>ls</td>
+<td>Lists files and folders</td>
+</tr>
+
+<tr>
+<td>cd</td>
+<td>Changes directory</td>
+</tr>
+
+<tr>
+<td>mkdir</td>
+<td>Creates a folder</td>
+</tr>
+
+<tr>
+<td>touch</td>
+<td>Creates a file</td>
+</tr>
+
+<tr>
+<td>cp</td>
+<td>Copies files</td>
+</tr>
+
+<tr>
+<td>mv</td>
+<td>Moves or renames files</td>
+</tr>
+
+<tr>
+<td>rm</td>
+<td>Deletes files</td>
+</tr>
+
+<tr>
+<td>cat</td>
+<td>Displays file content</td>
+</tr>
+
+<tr>
+<td>clear</td>
+<td>Clears the terminal screen</td>
+</tr>
+
+</table>
+
+<h2 id="uses">Applications of Linux</h2>
+
+<p>Linux is widely used in:</p>
+
+<ul>
+<li>Cloud Computing</li>
+<li>DevOps</li>
+<li>Web Hosting</li>
+<li>Cyber Security</li>
+<li>Artificial Intelligence</li>
+<li>Embedded Systems</li>
+<li>Android Operating System</li>
+<li>IoT Devices</li>
+<li>Networking</li>
+<li>Supercomputers</li>
+</ul>
+
+<h2 id="faq">Frequently Asked Questions</h2>
+
+<h3>Is Linux free?</h3>
+
+<p>Yes. Most Linux distributions are completely free to use.</p>
+
+<h3>Can beginners learn Linux?</h3>
+
+<p>Yes. Ubuntu and Linux Mint are beginner-friendly distributions.</p>
+
+<h3>Why do companies use Linux?</h3>
+
+<p>Linux provides excellent security, stability, flexibility, and low operating costs.</p>
+
+<h3>Is Linux good for programming?</h3>
+
+<p>Yes. Linux is one of the best operating systems for software development.</p>
+
+<h2>Conclusion</h2>
+
+<p>
+Linux is one of the world's most powerful and reliable operating systems.
+Whether you want to become a developer, DevOps engineer, cloud engineer,
+cybersecurity professional, or system administrator, learning Linux is an
+essential skill.
+</p>
+
+<a class="download" href="../Linux_Roadmap_20_Days.pdf" download>
+📥 Download Linux Roadmap PDF
 </a>
+
+</div>
+
+<footer>
+
+<p>© 2026 DevOps with Anu | Learn Linux Step by Step</p>
+
+</footer>
 
 </body>
 </html>
