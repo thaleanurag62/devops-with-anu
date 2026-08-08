@@ -1,1 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Linux Directory Structure Explained | Complete Beginner's Guide</title>
+
+<meta name="description" content="Learn the Linux directory structure and filesystem hierarchy including /, /home, /etc, /var, /usr, /bin, /boot and more with simple explanations and examples.">
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fc;
+    color:#333;
+    line-height:1.8;
+}
+
+header{
+    background:#1E3A8A;
+    color:white;
+    text-align:center;
+    padding:50px 20px;
+}
+
+header h1{
+    margin:0;
+    font-size:36px;
+}
+
+header p{
+    font-size:18px;
+}
+
+.container{
+    max-width:950px;
+    margin:30px auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 0 12px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#1E3A8A;
+    margin-top:40px;
+}
+
+h3{
+    color:#2563EB;
+}
+
+.toc{
+    background:#eef4ff;
+    border-left:5px solid #1E3A8A;
+    padding:20px;
+    margin:30px 0;
+}
+
+.toc a{
+    color:#1E3A8A;
+    text-decoration:none;
+}
+
+pre{
+    background:#f4f4f4;
+    padding:15px;
+    border-radius:7px;
+    overflow-x:auto;
+}
+
+code{
+    font-family:Consolas,monospace;
+}
+
+.note{
+    background:#fff8dc;
+    border-left:5px solid orange;
+    padding:15px;
+    margin:25px 0;
+}
+
+.directory{
+    background:#f8fafc;
+    border:1px solid #ddd;
+    padding:20px;
+    border-radius:8px;
+    margin:20px 0;
+}
+
+.download{
+    display:inline-block;
+    padding:12px 20px;
+    background:#2563EB;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Linux Directory Structure Explained</h1>
+
+<p>Complete Beginner's Guide | DevOps with Anu</p>
+
+</header>
+
+<div class="container">
+
+<h2>Introduction</h2>
+
+<p>
+Understanding the Linux directory structure is one of the first things every Linux beginner should learn. Unlike Windows, where drives such as C: and D: are commonly used, Linux uses a single hierarchical filesystem that starts from the root directory represented by <code>/</code>.
+</p>
+
+<p>
+Every file, directory, device, configuration file, application, and system resource is organized somewhere under this root directory. Once you understand what the major directories are used for, navigating Linux servers and troubleshooting problems becomes much easier.
+</p>
+
+<p>
+This guide explains the most important Linux directories in simple language and provides practical examples that beginners can use while learning Linux, DevOps, Cloud Computing, and System Administration.
+</p>
+
+<div class="toc">
+
+<h2>Table of Contents</h2>
+
+<ul>
+
+<li><a href="#filesystem">What is the Linux Filesystem?</a></li>
+
+<li><a href="#root">The Root Directory /</a></li>
+
+<li><a href="#bin">/bin</a></li>
+
+<li><a href="#boot">/boot</a></li>
+
+<li><a href="#dev">/dev</a></li>
+
+<li><a href="#etc">/etc</a></li>
+
+<li><a href="#home">/home</a></li>
+
+<li><a href="#lib">/lib</a></li>
+
+<li><a href="#media">/media</a></li>
+
+<li><a href="#mnt">/mnt</a></li>
+
+<li><a href="#opt">/opt</a></li>
+
+<li><a href="#proc">/proc</a></li>
+
+<li><a href="#rootdir">/root</a></li>
+
+<li><a href="#run">/run</a></li>
+
+<li><a href="#sbin">/sbin</a></li>
+
+<li><a href="#srv">/srv</a></li>
+
+<li><a href="#sys">/sys</a></li>
+
+<li><a href="#tmp">/tmp</a></li>
+
+<li><a href="#usr">/usr</a></li>
+
+<li><a href="#var">/var</a></li>
+
+</ul>
+
+</div>
+
+<div class="note">
+
+<strong>Important:</strong> The Linux filesystem is case-sensitive. For example,
+<code>/Home</code> and <code>/home</code> are different paths.
+
+</div>
+
+<h2 id="filesystem">What is the Linux Filesystem?</h2>
+
+<p>
+The Linux filesystem is a hierarchical structure used to organize files and directories. At the top of this hierarchy is the root directory, represented by a single forward slash:
+</p>
+
+<pre><code>/</code></pre>
+
+<p>
+All other directories are located below the root directory. You can think of the root directory as the starting point of the entire Linux filesystem.
+</p>
+
+<p>
+A simplified Linux directory structure looks like this:
+</p>
+
+<pre><code>/
+├── bin
+├── boot
+├── dev
+├── etc
+├── home
+├── lib
+├── media
+├── mnt
+├── opt
+├── proc
+├── root
+├── run
+├── sbin
+├── srv
+├── sys
+├── tmp
+├── usr
+└── var</code></pre>
+
+<p>
+The exact contents can vary between Linux distributions, but these directories generally follow the Linux filesystem hierarchy conventions.
+</p>
+
+<hr>
+
+<h2 id="root">1. / — Root Directory</h2>
+
+<p>
+The <code>/</code> directory is the top-level directory of a Linux filesystem. Every other directory and file is located somewhere underneath it.
+</p>
+
+<p>
+To view the contents of the root directory, use:
+</p>
+
+<pre><code>ls /</code></pre>
+
+<p>
+You may see directories such as <code>/home</code>, <code>/etc</code>, <code>/usr</code>, <code>/var</code>, and <code>/tmp</code>.
+</p>
+
+<div class="directory">
+
+<strong>Remember:</strong>
+
+<p>
+The root directory <code>/</code> is different from the <code>/root</code> directory. The first is the top of the filesystem hierarchy, while <code>/root</code> is the home directory of the root user.
+</p>
+
+</div>
+
+<hr>
+
+<h2 id="bin">2. /bin — Essential User Commands</h2>
+
+<p>
+The <code>/bin</code> directory traditionally contains essential commands required for basic system operation and for users to perform common tasks.
+</p>
+
+<p>
+Examples of commands commonly associated with this area include:
+</p>
+
+<pre><code>ls
+cp
+mv
+cat
+mkdir
+rm</code></pre>
+
+<p>
+On many modern Linux distributions, <code>/bin</code> may be linked to <code>/usr/bin</code> as part of a filesystem layout known as merged-usr.
+</p>
+
+<p>
+You can inspect the directory with:
+</p>
+
+<pre><code>ls /bin</code></pre>
+
+<hr>
+
+<h2 id="boot">3. /boot — Boot Files</h2>
+
+<p>
+The <code>/boot</code> directory contains files required during the Linux boot process. These files help the system start the operating system when the computer is powered on.
+</p>
+
+<p>
+You can inspect it using:
+</p>
+
+<pre><code>ls /boot</code></pre>
+
+<p>
+Depending on the Linux distribution, you may find the Linux kernel, bootloader-related files, and initial RAM filesystem images here.
+</p>
+
+<div class="note">
+
+<strong>Warning:</strong> Do not randomly delete or modify files inside <code>/boot</code>. Incorrect changes can prevent a Linux system from booting.
+
+</div>
+
+<hr>
+
+<h2 id="dev">4. /dev — Device Files</h2>
+
+<p>
+The <code>/dev</code> directory contains special files that represent devices connected to or recognized by the Linux system.
+</p>
+
+<p>
+Linux treats many hardware devices as files, allowing programs to interact with them through standard filesystem interfaces.
+</p>
+
+<p>
+For example:
+</p>
+
+<pre><code>ls /dev</code></pre>
+
+<p>
+You may see entries representing disks, terminals, USB devices, and other hardware.
+</p>
+
+<p>
+Some familiar examples include:
+</p>
+
+<pre><code>/dev/sda
+/dev/null
+/dev/tty</code></pre>
+
+<hr>
+
+<hr>
+
+<h2 id="etc">5. /etc — Configuration Files</h2>
+
+<p>
+The <code>/etc</code> directory contains system-wide configuration files.
+These files control how many services and applications behave on a Linux system.
+</p>
+
+<p>
+For example, you can view the contents using:
+</p>
+
+<pre><code>ls /etc</code></pre>
+
+<p>
+Some commonly known configuration files include:
+</p>
+
+<pre><code>/etc/hosts
+/etc/hostname
+/etc/passwd
+/etc/fstab</code></pre>
+
+<p>
+System administrators frequently work with files in <code>/etc</code> when configuring
+servers and services.
+</p>
+
+<div class="note">
+
+<strong>Important:</strong> Be careful when modifying configuration files in
+<code>/etc</code>. An incorrect configuration can affect system services.
+
+</div>
+
+<hr>
+
+<h2 id="home">6. /home — User Home Directories</h2>
+
+<p>
+The <code>/home</code> directory contains the personal directories of normal users.
+Each user generally has a separate directory where their personal files and settings
+are stored.
+</p>
+
+<p>For example:</p>
+
+<pre><code>/home/anurag
+/home/user1
+/home/user2</code></pre>
+
+<p>
+If your username is <code>anurag</code>, your personal files might be stored inside:
+</p>
+
+<pre><code>/home/anurag</code></pre>
+
+<p>
+You can go to your home directory using:
+</p>
+
+<pre><code>cd ~</code></pre>
+
+<p>
+The shortcut <code>~</code> represents the current user's home directory.
+</p>
+
+<hr>
+
+<h2 id="lib">7. /lib — Essential Libraries</h2>
+
+<p>
+The <code>/lib</code> directory traditionally contains essential shared libraries
+and kernel modules required by programs and the Linux system.
+</p>
+
+<p>
+Libraries provide reusable code that applications and system programs can use.
+This helps software work without every program having to contain all the required
+code itself.
+</p>
+
+<p>You can inspect the directory with:</p>
+
+<pre><code>ls /lib</code></pre>
+
+<p>
+On many modern distributions using a merged-usr filesystem layout,
+<code>/lib</code> may be linked to a directory under <code>/usr</code>.
+</p>
+
+<hr>
+
+<h2 id="media">8. /media — Removable Media</h2>
+
+<p>
+The <code>/media</code> directory is commonly used as a mount point for removable
+storage devices such as USB drives, CDs, and DVDs.
+</p>
+
+<p>
+For example, a USB device might be automatically mounted somewhere under:
+</p>
+
+<pre><code>/media/username/USB</code></pre>
+
+<p>
+You can check mounted media using:
+</p>
+
+<pre><code>ls /media</code></pre>
+
+<hr>
+
+<h2 id="mnt">9. /mnt — Temporary Mount Point</h2>
+
+<p>
+The <code>/mnt</code> directory is commonly used as a temporary mount point for
+filesystems or storage devices.
+</p>
+
+<p>
+For example, an administrator might mount a filesystem at:
+</p>
+
+<pre><code>/mnt/data</code></pre>
+
+<p>
+The exact way storage is mounted depends on the system configuration and the
+administrator's requirements.
+</p>
+
+<hr>
+
+<h2 id="opt">10. /opt — Optional Software</h2>
+
+<p>
+The <code>/opt</code> directory is intended for optional or additional software
+packages that are installed outside the standard system software layout.
+</p>
+
+<p>
+For example, an administrator or software vendor may install an application under:
+</p>
+
+<pre><code>/opt/myapplication</code></pre>
+
+<p>
+This can make it easier to keep certain third-party applications separated from
+the main operating system files.
+</p>
+
+<hr>
+
+<h2>Why Are These Directories Important?</h2>
+
+<p>
+Knowing the purpose of common Linux directories makes it much easier to navigate
+a Linux server and troubleshoot problems. For example, if you need to modify a
+system configuration, you will often look in <code>/etc</code>. If you need to
+find a user's personal files, you will normally look under <code>/home</code>.
+</p>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+<tr>
+<th>Directory</th>
+<th>Main Purpose</th>
+</tr>
+
+<tr>
+<td><code>/</code></td>
+<td>Root of the entire filesystem</td>
+</tr>
+
+<tr>
+<td><code>/bin</code></td>
+<td>Essential user commands</td>
+</tr>
+
+<tr>
+<td><code>/boot</code></td>
+<td>Files required during system boot</td>
+</tr>
+
+<tr>
+<td><code>/dev</code></td>
+<td>Device files</td>
+</tr>
+
+<tr>
+<td><code>/etc</code></td>
+<td>System configuration files</td>
+</tr>
+
+<tr>
+<td><code>/home</code></td>
+<td>Personal directories of normal users</td>
+</tr>
+
+<tr>
+<td><code>/lib</code></td>
+<td>Essential libraries and modules</td>
+</tr>
+
+<tr>
+<td><code>/media</code></td>
+<td>Mount points for removable media</td>
+</tr>
+
+<tr>
+<td><code>/mnt</code></td>
+<td>Temporary filesystem mount point</td>
+</tr>
+
+<tr>
+<td><code>/opt</code></td>
+<td>Optional or additional software</td>
+</tr>
+
+</table>
+
+<hr>
+
+<hr>
+
+<h2 id="proc">11. /proc — Process Information</h2>
+
+<p>
+The <code>/proc</code> directory is a virtual filesystem that provides information
+about running processes and the Linux kernel. Unlike normal files, much of the
+information in <code>/proc</code> is generated dynamically by the kernel.
+</p>
+
+<p>You can view its contents with:</p>
+
+<pre><code>ls /proc</code></pre>
+
+<p>
+For example, directories containing numbers usually represent running processes.
+You can also view information about the CPU with:
+</p>
+
+<pre><code>cat /proc/cpuinfo</code></pre>
+
+<p>
+The <code>/proc</code> filesystem is particularly useful for system monitoring and
+troubleshooting.
+</p>
+
+<hr>
+
+<h2 id="rootdir">12. /root — Root User's Home Directory</h2>
+
+<p>
+The <code>/root</code> directory is the home directory of the <strong>root user</strong>,
+which is the administrative user on a Linux system.
+</p>
+
+<p>
+It is different from the <code>/</code> root directory. The slash
+<code>/</code> represents the top of the filesystem, while <code>/root</code>
+belongs specifically to the root user's home directory.
+</p>
+
+<p>You can access it when you have the required privileges:</p>
+
+<pre><code>sudo ls /root</code></pre>
+
+<div class="note">
+
+<strong>Remember:</strong> Avoid using the root account for everyday work.
+Administrative commands should be used carefully because they can modify critical
+parts of the operating system.
+
+</div>
+
+<hr>
+
+<h2 id="run">13. /run — Runtime Data</h2>
+
+<p>
+The <code>/run</code> directory stores temporary runtime information created by
+the system and running services. This information is generally created during
+system startup.
+</p>
+
+<p>
+You can inspect it with:
+</p>
+
+<pre><code>ls /run</code></pre>
+
+<p>
+The exact files and directories inside <code>/run</code> depend on the Linux
+distribution and the services currently running.
+</p>
+
+<hr>
+
+<h2 id="sbin">14. /sbin — System Administration Commands</h2>
+
+<p>
+The <code>/sbin</code> directory traditionally contains important system
+administration commands. These commands are primarily used for managing and
+maintaining the operating system.
+</p>
+
+<p>
+Examples can include commands related to networking, filesystem management,
+and system administration.
+</p>
+
+<p>You can inspect it with:</p>
+
+<pre><code>ls /sbin</code></pre>
+
+<p>
+On modern Linux distributions, <code>/sbin</code> may also be part of a
+merged-usr layout and point to <code>/usr/sbin</code>.
+</p>
+
+<hr>
+
+<h2 id="srv">15. /srv — Service Data</h2>
+
+<p>
+The <code>/srv</code> directory is intended for data served by system services.
+The name "srv" comes from the word "service".
+</p>
+
+<p>
+For example, a server administrator may organize data for a web or file service
+under this directory.
+</p>
+
+<pre><code>/srv
+└── website</code></pre>
+
+<p>
+Its actual use depends on how the server is configured.
+</p>
+
+<hr>
+
+<h2 id="sys">16. /sys — Kernel and Device Information</h2>
+
+<p>
+The <code>/sys</code> directory is another virtual filesystem provided by the
+Linux kernel. It exposes information about devices, drivers, and other parts
+of the system.
+</p>
+
+<p>You can inspect it using:</p>
+
+<pre><code>ls /sys</code></pre>
+
+<p>
+The information in <code>/sys</code> is useful for system administrators and
+advanced users who need to inspect hardware and kernel-related information.
+</p>
+
+<hr>
+
+<h2 id="tmp">17. /tmp — Temporary Files</h2>
+
+<p>
+The <code>/tmp</code> directory is used by applications and users to store
+temporary files.
+</p>
+
+<p>For example:</p>
+
+<pre><code>touch /tmp/test.txt</code></pre>
+
+<p>
+Temporary files may be removed automatically depending on the Linux distribution
+and its configuration.
+</p>
+
+<div class="note">
+
+<strong>Important:</strong> Do not use <code>/tmp</code> for important permanent
+data. Temporary files are not intended to be long-term storage.
+
+</div>
+
+<hr>
+
+<h2 id="usr">18. /usr — User Programs and Data</h2>
+
+<p>
+The <code>/usr</code> directory contains a large amount of software, libraries,
+documentation, and other read-only user-space data used by the operating system.
+</p>
+
+<p>
+Some important directories inside <code>/usr</code> include:
+</p>
+
+<pre><code>/usr/bin
+/usr/sbin
+/usr/lib
+/usr/share
+/usr/local</code></pre>
+
+<p>
+For example, many applications and commands installed on a Linux system can be
+found under <code>/usr/bin</code>.
+</p>
+
+<pre><code>ls /usr/bin</code></pre>
+
+<hr>
+
+<h2 id="var">19. /var — Variable Data</h2>
+
+<p>
+The <code>/var</code> directory contains data that is expected to change while
+the system is running. This includes logs, caches, queues, and other
+application-generated data.
+</p>
+
+<p>
+Some important locations include:
+</p>
+
+<pre><code>/var/log
+/var/cache
+/var/tmp</code></pre>
+
+<p>
+The <code>/var/log</code> directory is especially important for system
+administration because it contains many system and application logs.
+</p>
+
+<p>You can view available log files with:</p>
+
+<pre><code>ls /var/log</code></pre>
+
+<hr>
+
+<h2>Linux Directory Structure Cheat Sheet</h2>
+
+<table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+<tr>
+<th>Directory</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td><code>/</code></td>
+<td>Top-level root of the filesystem</td>
+</tr>
+
+<tr>
+<td><code>/bin</code></td>
+<td>Essential user commands</td>
+</tr>
+
+<tr>
+<td><code>/boot</code></td>
+<td>Boot-related files</td>
+</tr>
+
+<tr>
+<td><code>/dev</code></td>
+<td>Device files</td>
+</tr>
+
+<tr>
+<td><code>/etc</code></td>
+<td>System configuration files</td>
+</tr>
+
+<tr>
+<td><code>/home</code></td>
+<td>Normal users' home directories</td>
+</tr>
+
+<tr>
+<td><code>/lib</code></td>
+<td>Essential libraries and modules</td>
+</tr>
+
+<tr>
+<td><code>/media</code></td>
+<td>Removable media mount points</td>
+</tr>
+
+<tr>
+<td><code>/mnt</code></td>
+<td>Temporary mount point</td>
+</tr>
+
+<tr>
+<td><code>/opt</code></td>
+<td>Optional software</td>
+</tr>
+
+<tr>
+<td><code>/proc</code></td>
+<td>Process and kernel information</td>
+</tr>
+
+<tr>
+<td><code>/root</code></td>
+<td>Root user's home directory</td>
+</tr>
+
+<tr>
+<td><code>/run</code></td>
+<td>Runtime system data</td>
+</tr>
+
+<tr>
+<td><code>/sbin</code></td>
+<td>System administration commands</td>
+</tr>
+
+<tr>
+<td><code>/srv</code></td>
+<td>Data served by services</td>
+</tr>
+
+<tr>
+<td><code>/sys</code></td>
+<td>Kernel and device information</td>
+</tr>
+
+<tr>
+<td><code>/tmp</code></td>
+<td>Temporary files</td>
+</tr>
+
+<tr>
+<td><code>/usr</code></td>
+<td>User programs and supporting data</td>
+</tr>
+
+<tr>
+<td><code>/var</code></td>
+<td>Variable data such as logs and caches</td>
+</tr>
+
+</table>
+
+<hr>
+
+<h2>Practical Commands to Explore the Linux Filesystem</h2>
+
+<p>
+Now that you understand the major directories, you can explore them directly
+from a Linux terminal.
+</p>
+
+<pre><code>pwd
+ls /
+ls /etc
+ls /home
+ls /var/log
+cd /tmp
+pwd</code></pre>
+
+<p>
+These simple commands are a good way to become familiar with the Linux filesystem.
+Always be careful when modifying system directories, especially when using
+administrative privileges.
+</p>
+
+<hr>
+
+<h2>Common Beginner Mistakes</h2>
+
+<ul>
+
+<li>Confusing <code>/</code> with <code>/root</code>.</li>
+
+<li>Deleting important files from system directories.</li>
+
+<li>Changing configuration files without understanding them.</li>
+
+<li>Using <code>sudo</code> for commands that do not require administrative privileges.</li>
+
+<li>Assuming Linux directories work exactly like Windows folders.</li>
+
+</ul>
+
+<hr>
+
+<h2>Frequently Asked Questions</h2>
+
+<h3>What is the root directory in Linux?</h3>
+
+<p>
+The root directory is represented by <code>/</code>. It is the highest level of
+the Linux filesystem hierarchy, and all other directories exist underneath it.
+</p>
+
+<h3>What is the difference between / and /root?</h3>
+
+<p>
+The <code>/</code> directory is the top of the entire filesystem. The
+<code>/root</code> directory is the home directory of the root user.
+</p>
+
+<h3>Where are Linux configuration files stored?</h3>
+
+<p>
+Most system-wide configuration files are stored in the <code>/etc</code>
+directory.
+</p>
+
+<h3>Where are normal users' files stored?</h3>
+
+<p>
+Normal users generally have their personal directories under <code>/home</code>.
+For example, a user named Anu might have a home directory such as
+<code>/home/anu</code>.
+</p>
+
+<h3>Where are Linux log files stored?</h3>
+
+<p>
+Many Linux logs are stored under <code>/var/log</code>. The exact log files
+available depend on the distribution and installed services.
+</p>
+
+<h3>What is the /tmp directory used for?</h3>
+
+<p>
+<code>/tmp</code> is used for temporary files created by applications and users.
+Its contents may be cleaned automatically by the system.
+</p>
+
+<h3>Why is understanding the Linux directory structure important for DevOps?</h3>
+
+<p>
+DevOps engineers frequently work with Linux servers, application files,
+configuration files, logs, services, and permissions. Understanding where
+these resources are located makes server management and troubleshooting much
+easier.
+</p>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>
+The Linux directory structure may look confusing when you first start using
+Linux, but each major directory has a specific purpose. The most important
+directories to remember are <code>/</code>, <code>/home</code>, <code>/etc</code>,
+<code>/var</code>, <code>/usr</code>, <code>/tmp</code>, and <code>/boot</code>.
+</p>
+
+<p>
+As you continue learning Linux, regularly explore these directories using the
+terminal. Understanding the filesystem hierarchy will give you a strong
+foundation for DevOps, Cloud Computing, System Administration, and Cyber Security.
+</p>
+
+<hr>
+
+<h2>📥 Download Linux Directory Structure PDF</h2>
+
+<p>
+Want a quick reference for the Linux filesystem hierarchy? Download the free
+Linux Directory Structure PDF from DevOps with Anu and keep it for offline study.
+</p>
+
+<a class="download" href="../Linux_Directory_Structure.pdf" download>
+📥 Download Linux Directory Structure PDF
+</a>
+
+</div>
+
+<footer>
+
+<p>© 2026 DevOps with Anu | Learn Linux Step by Step</p>
+
+</footer>
+
+</body>
+</html>
