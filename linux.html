@@ -7,12 +7,19 @@
 
 <title>Linux Resources | DevOps with Anu</title>
 
+<meta name="description" content="Free Linux study resources, beginner-friendly articles, Linux commands, file permissions, directory structure, process management and user management notes.">
+
+<meta name="keywords" content="Linux resources, Linux tutorial, Linux commands, Linux file permissions, Linux directory structure, Linux process management, DevOps with Anu">
+
+<meta name="author" content="DevOps with Anu">
+
 <style>
 
 body{
     margin:0;
     font-family:Arial,sans-serif;
     background:#f4f7fc;
+    color:#222;
 }
 
 header{
@@ -20,6 +27,16 @@ header{
     color:white;
     text-align:center;
     padding:50px 20px;
+}
+
+header h1{
+    margin:0 0 10px;
+    font-size:36px;
+}
+
+header p{
+    margin:0;
+    font-size:17px;
 }
 
 .container{
@@ -82,12 +99,83 @@ header{
     font-weight:bold;
 }
 
+.back:hover{
+    text-decoration:underline;
+}
+
+footer{
+    background:#111827;
+    color:#d1d5db;
+    text-align:center;
+    padding:30px 20px;
+    margin-top:50px;
+}
+
+footer h3{
+    color:white;
+    margin-top:0;
+}
+
+footer a{
+    color:#93c5fd;
+    text-decoration:none;
+    margin:0 8px;
+}
+
+footer a:hover{
+    text-decoration:underline;
+}
+
+.footer-copy{
+    margin-top:15px;
+    font-size:14px;
+    color:#9ca3af;
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:40px 15px;
+    }
+
+    header h1{
+        font-size:28px;
+    }
+
+    header p{
+        font-size:15px;
+    }
+
+    .container{
+        margin:20px auto;
+        padding:15px;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .card h2{
+        font-size:22px;
+    }
+
+    .button{
+        display:block;
+        text-align:center;
+        margin-right:0;
+    }
+
+}
+
 </style>
 
+
 <!-- Google Analytics -->
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS0N4L0WKV"></script>
 
 <script>
+
 window.dataLayer = window.dataLayer || [];
 
 function gtag(){
@@ -95,14 +183,25 @@ function gtag(){
 }
 
 gtag('js', new Date());
+
 gtag('config', 'G-SS0N4L0WKV');
+
 </script>
 
 </head>
 
+
 <body>
 
-<a href="index.html" class="back">← Back to Home</a>
+
+<!-- BACK TO HOME -->
+
+<a href="index.html" class="back">
+← Back to Home
+</a>
+
+
+<!-- HEADER -->
 
 <header>
 
@@ -114,6 +213,9 @@ Download Free Linux Study Material & Read Beginner-Friendly Articles
 
 </header>
 
+
+<!-- MAIN CONTENT -->
+
 <div class="container">
 
 
@@ -124,12 +226,13 @@ Download Free Linux Study Material & Read Beginner-Friendly Articles
 <h2>📄 Linux Roadmap (20 Days)</h2>
 
 <p>
-Complete beginner roadmap to learn Linux in 20 days.
+Complete beginner roadmap to learn Linux in 20 days. Follow the roadmap
+step by step and build a strong foundation in Linux and system administration.
 </p>
 
 <div class="buttons">
 
-<a href="Linux_Roadmap_20_Days.pdf"
+<a href="linux/Linux_Roadmap_20_Days.pdf"
 class="button"
 download>
 📥 Download PDF
@@ -152,12 +255,14 @@ class="button article-btn">
 <h2>📄 100 Linux Commands</h2>
 
 <p>
-Learn essential Linux commands with syntax, examples and practical explanations.
+Learn essential Linux commands with syntax, examples and practical
+explanations. Useful for beginners, students, system administrators
+and aspiring DevOps engineers.
 </p>
 
 <div class="buttons">
 
-<a href="Linux_100_Commands.pdf"
+<a href="linux/Linux_100_Commands.pdf"
 class="button"
 download>
 📥 Download PDF
@@ -180,13 +285,13 @@ class="button article-btn">
 <h2>📚 Linux Directory Structure</h2>
 
 <p>
-Learn the Linux filesystem hierarchy including /, /home, /etc, /var, /usr,
-/tmp, /boot and other important directories with practical examples.
+Learn the Linux filesystem hierarchy including /, /home, /etc, /var,
+/usr, /tmp, /boot and other important directories with practical examples.
 </p>
 
 <div class="buttons">
 
-<a href="Linux_Directory_Structure.pdf"
+<a href="linux/Linux_Directory_Structure.pdf"
 class="button"
 download>
 📥 Download PDF
@@ -206,19 +311,25 @@ class="button article-btn">
 
 <div class="card">
 
-<h2>📄 Linux File Permissions</h2>
+<h2>🔐 Linux File Permissions</h2>
 
 <p>
-Learn Linux file permissions, chmod, chown, chgrp and numeric permissions
-with beginner-friendly explanations.
+Learn Linux file permissions, read, write and execute permissions,
+user and group ownership, chmod, chown, chgrp and numeric permissions
+such as 755 and 644 with practical beginner-friendly examples.
 </p>
 
 <div class="buttons">
 
-<a href="Linux_File_Permissions.pdf"
+<a href="linux/Linux_File_Permissions.pdf"
 class="button"
 download>
 📥 Download PDF
+</a>
+
+<a href="linux/linux-file-permissions.html"
+class="button article-btn">
+📖 Read Article
 </a>
 
 </div>
@@ -234,12 +345,12 @@ download>
 
 <p>
 Learn whoami, id, groups, passwd and important Linux user and group
-management commands.
+management commands with practical examples.
 </p>
 
 <div class="buttons">
 
-<a href="Linux_User_Group_Management.pdf"
+<a href="linux/Linux_User_Group_Management.pdf"
 class="button"
 download>
 📥 Download PDF
@@ -258,12 +369,13 @@ download>
 
 <p>
 Learn ps, top, htop, kill, jobs, bg, fg, nohup, nice and other
-important process management commands.
+important process management commands used for monitoring and
+controlling Linux processes.
 </p>
 
 <div class="buttons">
 
-<a href="Linux_Process_Management.pdf"
+<a href="linux/Linux_Process_Management.pdf"
 class="button"
 download>
 📥 Download PDF
@@ -275,6 +387,34 @@ download>
 
 
 </div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<h3>DevOps with Anu</h3>
+
+<p>
+Simple and practical resources for Linux, Networking, DevOps and programming.
+</p>
+
+<p>
+
+<a href="index.html">Home</a>
+
+<a href="linux.html">Linux</a>
+
+</p>
+
+<div class="footer-copy">
+
+© 2026 DevOps with Anu. All rights reserved.
+
+</div>
+
+</footer>
+
 
 </body>
 </html>
