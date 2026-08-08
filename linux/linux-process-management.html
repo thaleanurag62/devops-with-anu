@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Linux Process Management | Complete Beginner's Guide | DevOps with Anu</title>
+
+<meta name="description" content="Learn Linux process management with practical examples. Understand ps, top, htop, jobs, bg, fg, kill, pkill, nohup, nice, renice and process states.">
+
+<meta name="keywords" content="Linux process management, Linux processes, ps command, top command, htop, kill command, jobs, bg, fg, nohup, nice, renice, Linux tutorial, DevOps">
+
+<meta name="author" content="DevOps with Anu">
+
+<link rel="canonical" href="https://thaleanurag62.github.io/devops-with-anu/linux/linux-process-management.html">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fc;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+
+/* HEADER */
+
+header{
+    background:#1E3A8A;
+    color:white;
+    padding:18px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+
+.header-container{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    color:white;
+    text-decoration:none;
+    font-size:24px;
+    font-weight:bold;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+}
+
+nav a:hover{
+    text-decoration:underline;
+}
+
+
+/* CONTAINER */
+
+.container{
+    max-width:950px;
+    margin:35px auto;
+    padding:0 18px;
+}
+
+
+/* ARTICLE */
+
+.article{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.07);
+}
+
+.article h1{
+    color:#1E3A8A;
+    font-size:36px;
+    line-height:1.25;
+    margin-top:0;
+    margin-bottom:10px;
+}
+
+.article h2{
+    color:#1E3A8A;
+    font-size:27px;
+    margin-top:42px;
+    padding-bottom:8px;
+    border-bottom:2px solid #e5e7eb;
+}
+
+.article h3{
+    color:#374151;
+    font-size:21px;
+    margin-top:28px;
+}
+
+.article p{
+    font-size:17px;
+    margin:15px 0;
+}
+
+.article ul,
+.article ol{
+    padding-left:25px;
+    font-size:17px;
+}
+
+.article li{
+    margin:7px 0;
+}
+
+
+/* INTRO */
+
+.article-intro{
+    background:#eff6ff;
+    border-left:5px solid #1E3A8A;
+    padding:18px 20px;
+    margin:25px 0;
+    border-radius:6px;
+}
+
+
+/* TABLE OF CONTENTS */
+
+.toc{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    padding:22px 25px;
+    border-radius:8px;
+    margin:25px 0;
+}
+
+.toc h3{
+    margin-top:0;
+    color:#1E3A8A;
+}
+
+.toc ul{
+    margin-bottom:0;
+}
+
+.toc a{
+    color:#1E3A8A;
+    text-decoration:none;
+}
+
+.toc a:hover{
+    text-decoration:underline;
+}
+
+
+/* TABLE */
+
+.table-wrapper{
+    overflow-x:auto;
+    margin:20px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,
+td{
+    border:1px solid #dbe1ea;
+    padding:12px 14px;
+    text-align:left;
+}
+
+th{
+    background:#1E3A8A;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+
+/* CODE */
+
+pre{
+    background:#111827;
+    color:#e5e7eb;
+    padding:18px;
+    border-radius:8px;
+    overflow-x:auto;
+    font-size:15px;
+    line-height:1.6;
+    margin:18px 0;
+}
+
+code{
+    font-family:"Courier New",monospace;
+}
+
+.article p code,
+.article td code,
+.article li code{
+    background:#eef2f7;
+    padding:2px 6px;
+    border-radius:4px;
+    color:#b91c1c;
+}
+
+
+/* BOXES */
+
+.note{
+    background:#fff7ed;
+    border-left:5px solid #f97316;
+    padding:17px 20px;
+    margin:22px 0;
+    border-radius:6px;
+}
+
+.tip{
+    background:#ecfdf5;
+    border-left:5px solid #10b981;
+    padding:17px 20px;
+    margin:22px 0;
+    border-radius:6px;
+}
+
+.warning{
+    background:#fef2f2;
+    border-left:5px solid #ef4444;
+    padding:17px 20px;
+    margin:22px 0;
+    border-radius:6px;
+}
+
+
+/* DOWNLOAD */
+
+.download-box{
+    background:#1E3A8A;
+    color:white;
+    padding:28px;
+    border-radius:10px;
+    margin:40px 0;
+    text-align:center;
+}
+
+.download-box h2{
+    color:white;
+    border:none;
+    margin-top:0;
+}
+
+.download-box p{
+    color:#e5e7eb;
+}
+
+.download-btn{
+    display:inline-block;
+    background:white;
+    color:#1E3A8A;
+    padding:12px 24px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.download-btn:hover{
+    background:#e5e7eb;
+}
+
+
+/* FAQ */
+
+.faq{
+    margin-top:20px;
+}
+
+.faq-item{
+    border:1px solid #e5e7eb;
+    margin-bottom:12px;
+    border-radius:7px;
+    overflow:hidden;
+}
+
+.faq-question{
+    background:#f8fafc;
+    padding:15px 18px;
+    font-weight:bold;
+    color:#1E3A8A;
+}
+
+.faq-answer{
+    padding:15px 18px;
+}
+
+
+/* RELATED */
+
+.related{
+    margin-top:40px;
+    padding-top:25px;
+    border-top:2px solid #e5e7eb;
+}
+
+.related a{
+    color:#1E3A8A;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.related a:hover{
+    text-decoration:underline;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#111827;
+    color:#d1d5db;
+    margin-top:50px;
+    padding:35px 20px;
+}
+
+.footer-container{
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+}
+
+.footer-title{
+    color:white;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+footer a{
+    color:#93c5fd;
+    text-decoration:none;
+    margin:0 8px;
+}
+
+footer a:hover{
+    text-decoration:underline;
+}
+
+.footer-copy{
+    margin-top:20px;
+    font-size:14px;
+    color:#9ca3af;
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    header{
+        position:relative;
+    }
+
+    .header-container{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    nav{
+        gap:12px;
+    }
+
+    .article{
+        padding:22px 18px;
+    }
+
+    .article h1{
+        font-size:28px;
+    }
+
+    .article h2{
+        font-size:23px;
+    }
+
+    .article h3{
+        font-size:19px;
+    }
+
+    .article p,
+    .article ul,
+    .article ol{
+        font-size:16px;
+    }
+
+    pre{
+        font-size:13px;
+        padding:14px;
+    }
+
+}
+
+</style>
+
+<!-- GOOGLE ANALYTICS -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SS0N4L0WKV"></script>
+
+<script>
+
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+    dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+
+gtag('config', 'G-SS0N4L0WKV');
+
+</script>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header-container">
+
+<a href="../index.html" class="logo">
+DevOps with Anu
+</a>
+
+<nav>
+
+<a href="../index.html">Home</a>
+
+<a href="../linux.html">Linux</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="container">
+
+<article class="article">
+
+<h1>Linux Process Management</h1>
+
+<p>
+A <strong>process</strong> is a running instance of a program in a Linux
+system. Whenever you start an application, execute a command or run a
+background service, Linux creates and manages one or more processes.
+</p>
+
+<div class="article-intro">
+
+<p>
+<strong>In this guide:</strong>
+Learn what Linux processes are, understand PID and PPID, process states,
+foreground and background processes, and important commands such as
+<code>ps</code>, <code>top</code>, <code>htop</code>, <code>jobs</code>,
+<code>bg</code>, <code>fg</code>, <code>kill</code>, <code>pkill</code>,
+<code>nohup</code>, <code>nice</code> and <code>renice</code>.
+</p>
+
+</div>
+
+<!-- TABLE OF CONTENTS -->
+
+<div class="toc">
+
+<h3>Table of Contents</h3>
+
+<ul>
+
+<li><a href="#what-is-process">What Is a Linux Process?</a></li>
+
+<li><a href="#pid">PID and PPID</a></li>
+
+<li><a href="#process-states">Linux Process States</a></li>
+
+<li><a href="#foreground-background">Foreground vs Background Processes</a></li>
+
+<li><a href="#ps">The ps Command</a></li>
+
+<li><a href="#ps-options">Useful ps Options</a></li>
+
+<li><a href="#top">The top Command</a></li>
+
+<li><a href="#htop">The htop Command</a></li>
+
+<li><a href="#jobs">The jobs Command</a></li>
+
+<li><a href="#bg">The bg Command</a></li>
+
+<li><a href="#fg">The fg Command</a></li>
+
+<li><a href="#kill">The kill Command</a></li>
+
+<li><a href="#pkill">The pkill Command</a></li>
+
+<li><a href="#nohup">The nohup Command</a></li>
+
+<li><a href="#nice">nice and Process Priority</a></li>
+
+<li><a href="#renice">The renice Command</a></li>
+
+<li><a href="#pstree">The pstree Command</a></li>
+
+<li><a href="#process-info">The /proc Filesystem</a></li>
+
+<li><a href="#practical">Practical Process Management Example</a></li>
+
+<li><a href="#security">Process Management Best Practices</a></li>
+
+<li><a href="#cheatsheet">Command Cheat Sheet</a></li>
+
+<li><a href="#faq">Frequently Asked Questions</a></li>
+
+</ul>
+
+</div>
+
+<!-- WHAT IS PROCESS -->
+
+<h2 id="what-is-process">What Is a Linux Process?</h2>
+
+<p>
+A process is a program that is currently executing. For example, when
+you open a terminal and run:
+</p>
+
+<pre><code>ls</code></pre>
+
+<p>
+Linux creates a process to execute the command. After the command
+finishes, that process normally exits.
+</p>
+
+<p>
+Long-running applications such as web servers, databases and system
+services can remain active for much longer periods.
+</p>
+
+<p>
+Linux assigns each running process an identification number called a
+<strong>PID</strong>.
+</p>
+
+<h3>Program vs Process</h3>
+
+<p>
+A program is a set of instructions stored on disk. A process is an
+active execution of those instructions.
+</p>
+
+<pre><code>Program
+   ↓
+Execution
+   ↓
+Process
+   ↓
+PID</code></pre>
+
+<!-- PID -->
+
+<h2 id="pid">PID and PPID</h2>
+
+<h3>PID</h3>
+
+<p>
+<strong>PID</strong> stands for <strong>Process ID</strong>. It is a
+numeric identifier assigned to a process.
+</p>
+
+<p>
+You can view processes and their PIDs with:
+</p>
+
+<pre><code>ps</code></pre>
+
+<h3>PPID</h3>
+
+<p>
+<strong>PPID</strong> stands for <strong>Parent Process ID</strong>.
+Many processes are created by another process, called their parent.
+</p>
+
+<p>
+For example:
+</p>
+
+<pre><code>Parent Process
+      |
+      └── Child Process</code></pre>
+
+<p>
+The relationship between processes can be useful when troubleshooting
+applications and services.
+</p>
+
+<!-- STATES -->
+
+<h2 id="process-states">Linux Process States</h2>
+
+<p>
+Linux processes can move through different states during their lifetime.
+Common process states include:
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>State</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>R</td>
+<td>Running or runnable</td>
+</tr>
+
+<tr>
+<td>S</td>
+<td>Interruptible sleep</td>
+</tr>
+
+<tr>
+<td>D</td>
+<td>Uninterruptible sleep, often waiting for I/O</td>
+</tr>
+
+<tr>
+<td>T</td>
+<td>Stopped or traced</td>
+</tr>
+
+<tr>
+<td>Z</td>
+<td>Zombie process</td>
+</tr>
+
+</table>
+
+</div>
+
+<h3>Running</h3>
+
+<p>
+A process in the running or runnable state is executing or waiting for
+CPU time.
+</p>
+
+<h3>Sleeping</h3>
+
+<p>
+A sleeping process is waiting for an event, input or resource before it
+can continue.
+</p>
+
+<h3>Zombie</h3>
+
+<p>
+A zombie process has finished execution, but its parent has not yet
+collected its exit status.
+</p>
+
+<div class="note">
+
+<strong>Note:</strong>
+A small number of short-lived zombie processes can occur normally.
+Persistent zombie processes may indicate that a parent process is not
+properly handling child processes.
+
+</div>
+
+<!-- FOREGROUND -->
+
+<h2 id="foreground-background">Foreground vs Background Processes</h2>
+
+<h3>Foreground Process</h3>
+
+<p>
+A foreground process occupies the current terminal session and normally
+receives input from that terminal.
+</p>
+
+<p>
+For example:
+</p>
+
+<pre><code>ping example.com</code></pre>
+
+<p>
+You can stop or interrupt many foreground commands with:
+</p>
+
+<pre><code>Ctrl + C</code></pre>
+
+<h3>Background Process</h3>
+
+<p>
+A background process can continue running while you use the same shell.
+One simple way to start a command in the background is to append
+<code>&amp;</code>.
+</p>
+
+<pre><code>sleep 60 &amp;</code></pre>
+
+<p>
+The shell will return control to you while the command runs.
+</p>
+
+<!-- PS -->
+
+<h2 id="ps">The ps Command</h2>
+
+<p>
+The <code>ps</code> command provides a snapshot of currently running
+processes.
+</p>
+
+<p>
+Basic usage:
+</p>
+
+<pre><code>ps</code></pre>
+
+<p>
+This commonly shows processes associated with the current terminal.
+</p>
+
+<h3>View Processes for All Users</h3>
+
+<pre><code>ps aux</code></pre>
+
+<p>
+This is one of the most commonly used forms of <code>ps</code> when
+troubleshooting a Linux system.
+</p>
+
+<h3>View a Full Process Listing</h3>
+
+<pre><code>ps -ef</code></pre>
+
+<p>
+This displays processes in a different format and includes parent
+process information.
+</p>
+
+<!-- PS OPTIONS -->
+
+<h2 id="ps-options">Useful ps Options</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td><code>ps</code></td>
+<td>Show processes associated with the current terminal</td>
+</tr>
+
+<tr>
+<td><code>ps aux</code></td>
+<td>Show processes for all users</td>
+</tr>
+
+<tr>
+<td><code>ps -ef</code></td>
+<td>Display a full-format process listing</td>
+</tr>
+
+<tr>
+<td><code>ps -u username</code></td>
+<td>Show processes belonging to a specific user</td>
+</tr>
+
+<tr>
+<td><code>ps -p PID</code></td>
+<td>Show information about a specific PID</td>
+</tr>
+
+</table>
+
+</div>
+
+<h3>Find a Specific Process</h3>
+
+<p>
+You can combine <code>ps</code> with tools such as <code>grep</code>:
+</p>
+
+<pre><code>ps aux | grep nginx</code></pre>
+
+<p>
+This can help locate processes matching a particular name.
+</p>
+
+<!-- TOP -->
+
+<h2 id="top">The top Command</h2>
+
+<p>
+The <code>top</code> command provides a continuously updating view of
+system processes and resource usage.
+</p>
+
+<pre><code>top</code></pre>
+
+<p>
+It can help you identify processes consuming significant CPU or memory.
+</p>
+
+<p>
+The display commonly includes information such as:
+</p>
+
+<ul>
+
+<li>Process ID</li>
+
+<li>User</li>
+
+<li>CPU usage</li>
+
+<li>Memory usage</li>
+
+<li>Process state</li>
+
+<li>Command name</li>
+
+</ul>
+
+<p>
+To exit <code>top</code>, press:
+</p>
+
+<pre><code>q</code></pre>
+
+<!-- HTOP -->
+
+<h2 id="htop">The htop Command</h2>
+
+<p>
+<code>htop</code> is an interactive process viewer that provides a more
+user-friendly interface than traditional <code>top</code> on systems
+where it is installed.
+</p>
+
+<pre><code>htop</code></pre>
+
+<p>
+Depending on the distribution, you may need to install it first.
+For Debian or Ubuntu-based systems:
+</p>
+
+<pre><code>sudo apt install htop</code></pre>
+
+<p>
+The exact installation command can differ between Linux distributions.
+</p>
+
+<!-- JOBS -->
+
+<h2 id="jobs">The jobs Command</h2>
+
+<p>
+The <code>jobs</code> command displays jobs started by the current shell.
+</p>
+
+<p>
+For example:
+</p>
+
+<pre><code>sleep 100 &amp;
+
+jobs</code></pre>
+
+<p>
+You may see something similar to:
+</p>
+
+<pre><code>[1]+  Running    sleep 100 &amp;</code></pre>
+
+<p>
+The number in brackets is the job ID for that shell.
+</p>
+
+<!-- BG -->
+
+<h2 id="bg">The bg Command</h2>
+
+<p>
+The <code>bg</code> command resumes a stopped job in the background.
+</p>
+
+<p>
+For example, start a command:
+</p>
+
+<pre><code>sleep 100</code></pre>
+
+<p>
+Press:
+</p>
+
+<pre><code>Ctrl + Z</code></pre>
+
+<p>
+This suspends the job. You can then run:
+</p>
+
+<pre><code>bg</code></pre>
+
+<p>
+The job will continue in the background.
+</p>
+
+<!-- FG -->
+
+<h2 id="fg">The fg Command</h2>
+
+<p>
+The <code>fg</code> command brings a background job into the foreground.
+</p>
+
+<pre><code>fg</code></pre>
+
+<p>
+If you have multiple jobs, specify the job number:
+</p>
+
+<pre><code>fg %1</code></pre>
+
+<!-- KILL -->
+
+<h2 id="kill">The kill Command</h2>
+
+<p>
+The <code>kill</code> command sends a signal to a process. It does not
+always mean that the process is immediately terminated.
+</p>
+
+<p>
+First identify the PID:
+</p>
+
+<pre><code>ps</code></pre>
+
+<p>
+Then send a termination signal:
+</p>
+
+<pre><code>kill PID</code></pre>
+
+<p>
+For example:
+</p>
+
+<pre><code>kill 2450</code></pre>
+
+<h3>Common Signals</h3>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Signal</th>
+<th>Name</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td>15</td>
+<td>SIGTERM</td>
+<td>Request graceful termination</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>SIGKILL</td>
+<td>Force termination when other methods fail</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>SIGINT</td>
+<td>Interrupt a process</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>SIGSTOP</td>
+<td>Stop a process</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>SIGCONT</td>
+<td>Continue a stopped process</td>
+</tr>
+
+</table>
+
+</div>
+
+<h3>Using SIGTERM</h3>
+
+<p>
+A graceful termination request can be sent explicitly:
+</p>
+
+<pre><code>kill -15 PID</code></pre>
+
+<p>
+This gives the application an opportunity to perform cleanup.
+</p>
+
+<h3>Using SIGKILL</h3>
+
+<p>
+If a process does not respond to normal termination, an administrator
+may use:
+</p>
+
+<pre><code>kill -9 PID</code></pre>
+
+<div class="warning">
+
+<strong>Use SIGKILL carefully.</strong>
+A process cannot catch or handle SIGKILL, so it does not get an
+opportunity to perform normal cleanup.
+
+</div>
+
+<!-- PKILL -->
+
+<h2 id="pkill">The pkill Command</h2>
+
+<p>
+The <code>pkill</code> command can send signals to processes based on
+their name or other matching criteria.
+</p>
+
+<p>
+For example:
+</p>
+
+<pre><code>pkill process_name</code></pre>
+
+<p>
+Because process-name matching can affect more than one process, verify
+the target carefully before using it on important systems.
+</p>
+
+<!-- NOHUP -->
+
+<h2 id="nohup">The nohup Command</h2>
+
+<p>
+The <code>nohup</code> command allows a command to continue running even
+after the terminal session is closed, subject to the environment and
+how the process is launched.
+</p>
+
+<p>
+Example:
+</p>
+
+<pre><code>nohup python3 app.py &amp;</code></pre>
+
+<p>
+By default, output may be redirected to a file such as
+<code>nohup.out</code> if standard output is not otherwise redirected.
+</p>
+
+<p>
+A more explicit example is:
+</p>
+
+<pre><code>nohup python3 app.py &gt; app.log 2&gt;&amp;1 &amp;</code></pre>
+
+<p>
+This sends standard output and standard error to <code>app.log</code>.
+</p>
+
+<!-- NICE -->
+
+<h2 id="nice">nice and Process Priority</h2>
+
+<p>
+Linux uses a scheduling priority mechanism called the
+<strong>nice value</strong>.
+</p>
+
+<p>
+The nice value normally ranges from <strong>-20 to 19</strong>.
+Lower values represent higher scheduling priority, while higher values
+represent lower priority.
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Nice Value</th>
+<th>General Meaning</th>
+</tr>
+
+<tr>
+<td>-20</td>
+<td>Highest priority</td>
+</tr>
+
+<tr>
+<td>0</td>
+<td>Default value</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>Lowest priority</td>
+</tr>
+
+</table>
+
+</div>
+
+<h3>Starting a Process with nice</h3>
+
+<pre><code>nice -n 10 command</code></pre>
+
+<p>
+For example:
+</p>
+
+<pre><code>nice -n 10 python3 script.py</code></pre>
+
+<p>
+This starts the command with a positive nice value, giving it a lower
+CPU scheduling priority relative to the default.
+</p>
+
+<!-- RENICE -->
+
+<h2 id="renice">The renice Command</h2>
+
+<p>
+The <code>renice</code> command changes the nice value of an already
+running process.
+</p>
+
+<p>
+First identify the PID:
+</p>
+
+<pre><code>ps</code></pre>
+
+<p>
+Then:
+</p>
+
+<pre><code>renice 10 -p PID</code></pre>
+
+<p>
+Changing a process to a higher priority may require appropriate
+privileges.
+</p>
+
+<!-- PSTREE -->
+
+<h2 id="pstree">The pstree Command</h2>
+
+<p>
+The <code>pstree</code> command displays processes in a tree structure.
+This makes parent-child relationships easier to understand.
+</p>
+
+<pre><code>pstree</code></pre>
+
+<p>
+You can also include process IDs:
+</p>
+
+<pre><code>pstree -p</code></pre>
+
+<p>
+A simplified example:
+</p>
+
+<pre><code>systemd
+ ├── sshd
+ │    └── bash
+ │         └── python
+ └── cron</code></pre>
+
+<!-- PROC -->
+
+<h2 id="process-info">The /proc Filesystem</h2>
+
+<p>
+Linux provides detailed information about processes through the
+virtual <code>/proc</code> filesystem.
+</p>
+
+<p>
+For a process with PID 1234:
+</p>
+
+<pre><code>ls /proc/1234</code></pre>
+
+<p>
+Useful files and directories include:
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Path</th>
+<th>Information</th>
+</tr>
+
+<tr>
+<td><code>/proc/PID/status</code></td>
+<td>Process status and related information</td>
+</tr>
+
+<tr>
+<td><code>/proc/PID/cmdline</code></td>
+<td>Command-line information</td>
+</tr>
+
+<tr>
+<td><code>/proc/PID/fd</code></td>
+<td>File descriptors used by the process</td>
+</tr>
+
+<tr>
+<td><code>/proc/PID/cwd</code></td>
+<td>Current working directory link</td>
+</tr>
+
+<tr>
+<td><code>/proc/PID/exe</code></td>
+<td>Executable associated with the process</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- PRACTICAL -->
+
+<h2 id="practical">Practical Process Management Example</h2>
+
+<p>
+Let's walk through a simple process-management workflow.
+</p>
+
+<h3>Step 1: Start a Test Process</h3>
+
+<pre><code>sleep 300 &amp;</code></pre>
+
+<h3>Step 2: Check Background Jobs</h3>
+
+<pre><code>jobs</code></pre>
+
+<h3>Step 3: Find the Process</h3>
+
+<pre><code>ps aux | grep sleep</code></pre>
+
+<h3>Step 4: Identify the PID</h3>
+
+<p>
+Look at the process listing and identify the PID belonging to the
+<code>sleep</code> command.
+</p>
+
+<h3>Step 5: Request Termination</h3>
+
+<pre><code>kill PID</code></pre>
+
+<h3>Step 6: Verify</h3>
+
+<pre><code>ps -p PID</code></pre>
+
+<p>
+If the process has exited, it should no longer appear as an active
+process.
+</p>
+
+<!-- TROUBLESHOOTING -->
+
+<h2>Common Process Management Problems</h2>
+
+<h3>High CPU Usage</h3>
+
+<p>
+If a system becomes slow, start by identifying processes using
+significant CPU resources.
+</p>
+
+<pre><code>top</code></pre>
+
+<p>
+or:
+</p>
+
+<pre><code>ps aux --sort=-%cpu</code></pre>
+
+<h3>High Memory Usage</h3>
+
+<p>
+To view processes sorted by memory usage:
+</p>
+
+<pre><code>ps aux --sort=-%mem</code></pre>
+
+<h3>A Process Will Not Stop</h3>
+
+<p>
+Try a normal termination signal first:
+</p>
+
+<pre><code>kill PID</code></pre>
+
+<p>
+If the process does not terminate and you have determined that forceful
+termination is appropriate:
+</p>
+
+<pre><code>kill -9 PID</code></pre>
+
+<h3>Find Which Process Uses a Port</h3>
+
+<p>
+On systems with the appropriate tools installed, you can use:
+</p>
+
+<pre><code>ss -ltnp</code></pre>
+
+<p>
+This can help identify listening TCP services and associated processes
+when sufficient privileges are available.
+</p>
+
+<!-- SECURITY -->
+
+<h2 id="security">Linux Process Management Best Practices</h2>
+
+<h3>1. Identify Before Terminating</h3>
+
+<p>
+Always verify the PID and command before sending a signal.
+</p>
+
+<h3>2. Prefer Graceful Termination</h3>
+
+<p>
+Use the default <code>kill PID</code> or SIGTERM before using SIGKILL.
+</p>
+
+<h3>3. Avoid Unnecessary Root Privileges</h3>
+
+<p>
+Use <code>sudo</code> only when administrative privileges are actually
+required.
+</p>
+
+<h3>4. Monitor Resource Usage</h3>
+
+<p>
+Commands such as <code>top</code>, <code>htop</code> and <code>ps</code>
+are useful when diagnosing CPU and memory problems.
+</p>
+
+<h3>5. Be Careful with pkill</h3>
+
+<p>
+A name-based command can potentially match multiple processes.
+Always confirm what will be affected.
+</p>
+
+<h3>6. Test Commands Safely</h3>
+
+<p>
+Practice process-management commands using test processes or a virtual
+machine before applying unfamiliar commands to production systems.
+</p>
+
+<!-- CHEAT SHEET -->
+
+<h2 id="cheatsheet">Linux Process Management Cheat Sheet</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td><code>ps</code></td>
+<td>Show a snapshot of processes</td>
+</tr>
+
+<tr>
+<td><code>ps aux</code></td>
+<td>Show processes for all users</td>
+</tr>
+
+<tr>
+<td><code>ps -ef</code></td>
+<td>Show a full-format process listing</td>
+</tr>
+
+<tr>
+<td><code>top</code></td>
+<td>Monitor processes and resource usage interactively</td>
+</tr>
+
+<tr>
+<td><code>htop</code></td>
+<td>Interactive process viewer</td>
+</tr>
+
+<tr>
+<td><code>jobs</code></td>
+<td>Show jobs managed by the current shell</td>
+</tr>
+
+<tr>
+<td><code>bg</code></td>
+<td>Resume a stopped job in the background</td>
+</tr>
+
+<tr>
+<td><code>fg</code></td>
+<td>Bring a job to the foreground</td>
+</tr>
+
+<tr>
+<td><code>kill</code></td>
+<td>Send a signal to a process</td>
+</tr>
+
+<tr>
+<td><code>pkill</code></td>
+<td>Send signals based on process matching</td>
+</tr>
+
+<tr>
+<td><code>nohup</code></td>
+<td>Help keep a command running after terminal hangup</td>
+</tr>
+
+<tr>
+<td><code>nice</code></td>
+<td>Start a process with a selected nice value</td>
+</tr>
+
+<tr>
+<td><code>renice</code></td>
+<td>Change a running process's nice value</td>
+</tr>
+
+<tr>
+<td><code>pstree</code></td>
+<td>Display process relationships as a tree</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- QUICK REVISION -->
+
+<div class="note">
+
+<strong>Quick Revision:</strong>
+
+<br><br>
+
+<code>ps</code> → View processes
+
+<br>
+
+<code>top</code> → Monitor processes
+
+<br>
+
+<code>htop</code> → Interactive process monitoring
+
+<br>
+
+<code>jobs</code> → View shell jobs
+
+<br>
+
+<code>bg</code> → Continue a stopped job in background
+
+<br>
+
+<code>fg</code> → Bring a job to foreground
+
+<br>
+
+<code>kill</code> → Send a signal to a process
+
+<br>
+
+<code>pkill</code> → Signal processes by matching criteria
+
+<br>
+
+<code>nohup</code> → Help keep commands running after terminal hangup
+
+<br>
+
+<code>nice</code> → Start with a selected priority value
+
+<br>
+
+<code>renice</code> → Change priority of a running process
+
+<br>
+
+<code>pstree</code> → View process hierarchy
+
+</div>
+
+<!-- DOWNLOAD -->
+
+<div class="download-box">
+
+<h2>Download Linux Process Management Notes</h2>
+
+<p>
+Want to revise Linux process management offline?
+Download the study notes from the DevOps with Anu Linux resource library.
+</p>
+
+<a href="Linux_Process_Management.pdf"
+class="download-btn"
+download>
+📥 Download PDF </a>
+
+</div>
+
+<!-- FAQ -->
+
+<h2 id="faq">Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is a process in Linux?
+</div>
+
+<div class="faq-answer">
+A process is a running instance of a program. Linux assigns each
+process a unique process ID, or PID.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is a PID in Linux?
+</div>
+
+<div class="faq-answer">
+PID stands for Process ID. It is a numeric identifier used by Linux
+to identify a running process.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What does the ps command do?
+</div>
+
+<div class="faq-answer">
+The ps command provides a snapshot of running processes. Commands such
+as <code>ps aux</code> can show processes belonging to all users.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is the difference between ps and top?
+</div>
+
+<div class="faq-answer">
+ps generally provides a snapshot of processes, while top provides an
+interactive display that updates periodically.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is the difference between a foreground and background process?
+</div>
+
+<div class="faq-answer">
+A foreground process normally uses the current terminal for interaction.
+A background process can continue running while the shell accepts
+other commands.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What does kill do in Linux?
+</div>
+
+<div class="faq-answer">
+The kill command sends a signal to a process identified by its PID.
+The default signal is normally SIGTERM.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is kill -9?
+</div>
+
+<div class="faq-answer">
+kill -9 sends SIGKILL, which forcefully terminates a process. It should
+be used carefully because the process cannot handle or clean up from
+SIGKILL.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is nohup used for?
+</div>
+
+<div class="faq-answer">
+nohup can help a command continue running after a terminal hangup.
+It is commonly combined with background execution using &amp;.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What are nice and renice?
+</div>
+
+<div class="faq-answer">
+nice starts a process with a specified nice value, while renice changes
+the nice value of an already running process.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is a zombie process?
+</div>
+
+<div class="faq-answer">
+A zombie is a process that has finished execution but whose parent has
+not yet collected its exit status.
+</div>
+
+</div>
+
+<!-- CONCLUSION -->
+
+<h2>Conclusion</h2>
+
+<p>
+Linux process management is an essential skill for anyone working with
+Linux servers, DevOps, cloud infrastructure or system administration.
+</p>
+
+<p>
+Understanding processes helps you monitor applications, identify
+resource-intensive workloads, troubleshoot problems and safely control
+running programs.
+</p>
+
+<p>
+The most important commands to remember are:
+</p>
+
+<pre><code>ps
+top
+htop
+jobs
+bg
+fg
+kill
+pkill
+nohup
+nice
+renice
+pstree</code></pre>
+
+<p>
+Start by learning <code>ps</code>, <code>top</code>, <code>jobs</code>,
+<code>kill</code> and <code>nohup</code>. Once these commands become
+familiar, move on to process priorities, the <code>/proc</code>
+filesystem and more advanced troubleshooting techniques.
+</p>
+
+<p>
+The safest way to practice process management is with test processes
+or a virtual machine, especially when learning commands that can
+terminate or modify running processes.
+</p>
+
+<!-- RELATED -->
+
+<div class="related">
+
+<h2>Explore More Linux Resources</h2>
+
+<p>
+Continue learning Linux with more beginner-friendly articles and
+study material from <strong>DevOps with Anu</strong>.
+</p>
+
+<ul>
+
+<li>
+<a href="linux-file-permissions.html">
+Linux File Permissions
+</a>
+</li>
+
+<li>
+<a href="linux-user-group-management.html">
+Linux User &amp; Group Management
+</a>
+</li>
+
+<li>
+<a href="linux-directory-structure.html">
+Linux Directory Structure
+</a>
+</li>
+
+<li>
+<a href="linux-commands.html">
+100 Linux Commands
+</a>
+</li>
+
+<li>
+<a href="../linux.html">
+All Linux Resources
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</article>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-title">
+DevOps with Anu
+</div>
+
+<p>
+Simple and practical resources for Linux, Networking, DevOps and programming.
+</p>
+
+<p>
+
+<a href="../index.html">Home</a>
+
+<a href="../linux.html">Linux</a>
+
+</p>
+
+<div class="footer-copy">
+
+© 2026 DevOps with Anu. All rights reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>
