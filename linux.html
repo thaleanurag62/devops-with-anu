@@ -9,20 +9,27 @@
 
 <title>Linux Resources | DevOps with Anu</title>
 
-<meta name="description" content="Free Linux study resources, beginner-friendly articles, Linux commands, file permissions, directory structure, process management and user management notes.">
+<meta name="description" content="Free Linux study resources for beginners. Learn Linux commands, file permissions, directory structure, user and group management, process management and Linux fundamentals.">
 
-<meta name="keywords" content="Linux resources, Linux tutorial, Linux commands, Linux file permissions, Linux directory structure, Linux process management, Linux user management, Linux groups, DevOps with Anu">
+<meta name="keywords" content="Linux resources, Linux tutorial, Linux commands, Linux file permissions, Linux directory structure, Linux user management, Linux group management, Linux process management, DevOps with Anu">
 
 <meta name="author" content="DevOps with Anu">
 
 <style>
 
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#f4f7fc;
     color:#222;
 }
+
+
+/* HEADER */
 
 header{
     background:#1E3A8A;
@@ -39,7 +46,26 @@ header h1{
 header p{
     margin:0;
     font-size:17px;
+    line-height:1.6;
 }
+
+
+/* BACK BUTTON */
+
+.back{
+    display:inline-block;
+    margin:20px;
+    text-decoration:none;
+    color:#2563EB;
+    font-weight:bold;
+}
+
+.back:hover{
+    text-decoration:underline;
+}
+
+
+/* MAIN CONTAINER */
 
 .container{
     max-width:900px;
@@ -47,23 +73,31 @@ header p{
     padding:20px;
 }
 
+
+/* RESOURCE CARD */
+
 .card{
     background:white;
     padding:25px;
     margin-bottom:25px;
     border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
 .card h2{
     margin-top:0;
     color:#1E3A8A;
+    font-size:25px;
 }
 
 .card p{
     color:#555;
-    line-height:1.6;
+    line-height:1.7;
+    font-size:16px;
 }
+
+
+/* BUTTONS */
 
 .buttons{
     margin-top:20px;
@@ -74,10 +108,10 @@ header p{
     background:#2563EB;
     color:white;
     text-decoration:none;
-    padding:10px 20px;
+    padding:11px 20px;
     border-radius:8px;
     font-weight:bold;
-    margin-right:10px;
+    margin-right:8px;
     margin-bottom:10px;
 }
 
@@ -93,29 +127,24 @@ header p{
     background:#15803d;
 }
 
-.back{
-    display:inline-block;
-    margin:20px;
-    text-decoration:none;
-    color:#2563EB;
-    font-weight:bold;
-}
 
-.back:hover{
-    text-decoration:underline;
-}
+/* FOOTER */
 
 footer{
     background:#111827;
     color:#d1d5db;
     text-align:center;
-    padding:30px 20px;
+    padding:35px 20px;
     margin-top:50px;
 }
 
 footer h3{
     color:white;
     margin-top:0;
+}
+
+footer p{
+    line-height:1.6;
 }
 
 footer a{
@@ -129,10 +158,13 @@ footer a:hover{
 }
 
 .footer-copy{
-    margin-top:15px;
+    margin-top:18px;
     font-size:14px;
     color:#9ca3af;
 }
+
+
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -171,7 +203,7 @@ footer a:hover{
 
 </style>
 
-<!-- Google Analytics -->
+<!-- GOOGLE ANALYTICS -->
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SS0N4L0WKV"></script>
 
@@ -215,15 +247,16 @@ Download Free Linux Study Material & Read Beginner-Friendly Articles
 
 <div class="container">
 
-<!-- Linux Roadmap -->
+<!-- LINUX ROADMAP -->
 
 <div class="card">
 
 <h2>📄 Linux Roadmap (20 Days)</h2>
 
 <p>
-Complete beginner roadmap to learn Linux in 20 days. Follow the roadmap
-step by step and build a strong foundation in Linux and system administration.
+Complete beginner roadmap to learn Linux step by step. This roadmap
+covers important Linux concepts and commands and helps students build
+a strong foundation for Linux and system administration.
 </p>
 
 <div class="buttons">
@@ -241,7 +274,7 @@ class="button article-btn">
 
 </div>
 
-<!-- 100 Linux Commands -->
+<!-- 100 LINUX COMMANDS -->
 
 <div class="card">
 
@@ -249,8 +282,8 @@ class="button article-btn">
 
 <p>
 Learn essential Linux commands with syntax, examples and practical
-explanations. Useful for beginners, students, system administrators
-and aspiring DevOps engineers.
+explanations. This resource is useful for beginners, students,
+system administrators and aspiring DevOps engineers.
 </p>
 
 <div class="buttons">
@@ -268,7 +301,7 @@ class="button article-btn">
 
 </div>
 
-<!-- Linux Directory Structure -->
+<!-- LINUX DIRECTORY STRUCTURE -->
 
 <div class="card">
 
@@ -276,7 +309,8 @@ class="button article-btn">
 
 <p>
 Learn the Linux filesystem hierarchy including /, /home, /etc, /var,
-/ usr, /tmp, /boot and other important directories with practical examples.
+/usr, /tmp, /boot and other important directories. Understand what
+each directory is used for with simple practical examples.
 </p>
 
 <div class="buttons">
@@ -294,7 +328,7 @@ class="button article-btn">
 
 </div>
 
-<!-- Linux File Permissions -->
+<!-- LINUX FILE PERMISSIONS -->
 
 <div class="card">
 
@@ -302,8 +336,8 @@ class="button article-btn">
 
 <p>
 Learn Linux file permissions, read, write and execute permissions,
-user and group ownership, chmod, chown, chgrp and numeric permissions
-such as 755 and 644 with practical beginner-friendly examples.
+file ownership, users and groups, chmod, chown, chgrp and numeric
+permissions such as 755 and 644 with practical examples.
 </p>
 
 <div class="buttons">
@@ -321,16 +355,16 @@ class="button article-btn">
 
 </div>
 
-<!-- User & Group Management -->
+<!-- USER AND GROUP MANAGEMENT -->
 
 <div class="card">
 
 <h2>👥 Linux User &amp; Group Management</h2>
 
 <p>
-Learn Linux users and groups, UID, GID, whoami, id, groups, useradd,
-passwd, usermod, userdel, groupadd, groupmod, sudo and su with
-practical beginner-friendly examples.
+Learn how Linux manages users and groups. Understand UID, GID,
+whoami, id, groups, useradd, passwd, usermod, userdel, groupadd,
+sudo and su with beginner-friendly explanations and examples.
 </p>
 
 <div class="buttons">
@@ -348,16 +382,17 @@ class="button article-btn">
 
 </div>
 
-<!-- Process Management -->
+<!-- PROCESS MANAGEMENT -->
 
 <div class="card">
 
 <h2>⚙️ Linux Process Management</h2>
 
 <p>
-Learn ps, top, htop, kill, jobs, bg, fg, nohup, nice and other
-important process management commands used for monitoring and
-controlling Linux processes.
+Learn how Linux manages running programs and processes. Understand
+PID, PPID, process states, foreground and background processes,
+ps, top, htop, jobs, bg, fg, kill, pkill, nohup, nice, renice
+and other important process management commands.
 </p>
 
 <div class="buttons">
