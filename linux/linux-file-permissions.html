@@ -1,1 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Linux File Permissions Explained | chmod, chown & Linux Permissions</title>
+
+<meta name="description" content="Learn Linux file permissions with this beginner-friendly guide. Understand read, write, execute permissions, chmod, chown, chgrp, numeric permissions and practical Linux examples.">
+
+<meta name="keywords" content="Linux file permissions, Linux permissions, chmod, chown, chgrp, Linux commands, Linux tutorial, DevOps, Linux for beginners">
+
+<meta name="author" content="DevOps with Anu">
+
+<link rel="canonical" href="https://thaleanurag62.github.io/devops-with-anu/linux-file-permissions.html">
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f4f7fc;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+/* HEADER */
+
+header{
+    background:#1E3A8A;
+    color:white;
+    padding:18px 20px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
+}
+
+.header-container{
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    text-decoration:none;
+    color:white;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+}
+
+nav a:hover{
+    text-decoration:underline;
+}
+
+/* MAIN */
+
+.container{
+    max-width:950px;
+    margin:35px auto;
+    padding:0 18px;
+}
+
+/* ARTICLE */
+
+.article{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.07);
+}
+
+.article h1{
+    color:#1E3A8A;
+    font-size:36px;
+    line-height:1.25;
+    margin-top:0;
+    margin-bottom:10px;
+}
+
+.article h2{
+    color:#1E3A8A;
+    font-size:27px;
+    margin-top:42px;
+    padding-bottom:8px;
+    border-bottom:2px solid #e5e7eb;
+}
+
+.article h3{
+    color:#374151;
+    font-size:21px;
+    margin-top:28px;
+}
+
+.article p{
+    font-size:17px;
+    margin:15px 0;
+}
+
+.article ul,
+.article ol{
+    padding-left:25px;
+    font-size:17px;
+}
+
+.article li{
+    margin:7px 0;
+}
+
+/* INTRO */
+
+.article-intro{
+    background:#eff6ff;
+    border-left:5px solid #1E3A8A;
+    padding:18px 20px;
+    margin:25px 0;
+    border-radius:6px;
+}
+
+/* TABLE */
+
+.table-wrapper{
+    overflow-x:auto;
+    margin:20px 0;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,
+td{
+    border:1px solid #dbe1ea;
+    padding:12px 14px;
+    text-align:left;
+}
+
+th{
+    background:#1E3A8A;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f8fafc;
+}
+
+/* CODE */
+
+pre{
+    background:#111827;
+    color:#e5e7eb;
+    padding:18px;
+    border-radius:8px;
+    overflow-x:auto;
+    font-size:15px;
+    line-height:1.6;
+    margin:18px 0;
+}
+
+code{
+    font-family:"Courier New", monospace;
+}
+
+.inline-code{
+    background:#eef2f7;
+    padding:2px 6px;
+    border-radius:4px;
+    color:#b91c1c;
+    font-family:"Courier New", monospace;
+}
+
+/* NOTE BOX */
+
+.note{
+    background:#fff7ed;
+    border-left:5px solid #f97316;
+    padding:17px 20px;
+    margin:22px 0;
+    border-radius:6px;
+}
+
+.tip{
+    background:#ecfdf5;
+    border-left:5px solid #10b981;
+    padding:17px 20px;
+    margin:22px 0;
+    border-radius:6px;
+}
+
+.warning{
+    background:#fef2f2;
+    border-left:5px solid #ef4444;
+    padding:17px 20px;
+    margin:22px 0;
+    border-radius:6px;
+}
+
+/* TOC */
+
+.toc{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    padding:22px 25px;
+    border-radius:8px;
+    margin:25px 0;
+}
+
+.toc h3{
+    margin-top:0;
+    color:#1E3A8A;
+}
+
+.toc ul{
+    margin-bottom:0;
+}
+
+.toc a{
+    color:#1E3A8A;
+    text-decoration:none;
+}
+
+.toc a:hover{
+    text-decoration:underline;
+}
+
+/* DOWNLOAD */
+
+.download-box{
+    background:#1E3A8A;
+    color:white;
+    padding:28px;
+    border-radius:10px;
+    margin:35px 0;
+    text-align:center;
+}
+
+.download-box h2{
+    color:white;
+    border:none;
+    margin-top:0;
+}
+
+.download-box p{
+    color:#e5e7eb;
+}
+
+.download-btn{
+    display:inline-block;
+    background:white;
+    color:#1E3A8A;
+    padding:12px 24px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.download-btn:hover{
+    background:#e5e7eb;
+}
+
+/* FAQ */
+
+.faq{
+    margin-top:20px;
+}
+
+.faq-item{
+    border:1px solid #e5e7eb;
+    margin-bottom:12px;
+    border-radius:7px;
+    overflow:hidden;
+}
+
+.faq-question{
+    background:#f8fafc;
+    padding:15px 18px;
+    font-weight:bold;
+    color:#1E3A8A;
+}
+
+.faq-answer{
+    padding:15px 18px;
+}
+
+/* RELATED */
+
+.related{
+    margin-top:40px;
+    padding-top:25px;
+    border-top:2px solid #e5e7eb;
+}
+
+.related a{
+    color:#1E3A8A;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.related a:hover{
+    text-decoration:underline;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111827;
+    color:#d1d5db;
+    margin-top:50px;
+    padding:35px 20px;
+}
+
+.footer-container{
+    max-width:1100px;
+    margin:auto;
+    text-align:center;
+}
+
+.footer-title{
+    color:white;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+footer a{
+    color:#93c5fd;
+    text-decoration:none;
+    margin:0 8px;
+}
+
+footer a:hover{
+    text-decoration:underline;
+}
+
+.footer-copy{
+    margin-top:20px;
+    font-size:14px;
+    color:#9ca3af;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    header{
+        position:relative;
+    }
+
+    .header-container{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    nav{
+        gap:12px;
+    }
+
+    .article{
+        padding:22px 18px;
+    }
+
+    .article h1{
+        font-size:28px;
+    }
+
+    .article h2{
+        font-size:23px;
+    }
+
+    .article h3{
+        font-size:19px;
+    }
+
+    .article p,
+    .article ul,
+    .article ol{
+        font-size:16px;
+    }
+
+    pre{
+        font-size:13px;
+        padding:14px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header-container">
+
+<a href="index.html" class="logo">
+DevOps with Anu
+</a>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="linux.html">Linux</a>
+<a href="python.html">Python</a>
+<a href="index.html#about">About</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+<article class="article">
+
+<h1>Linux File Permissions</h1>
+
+<p>
+<strong>Linux file permissions</strong> are one of the most important concepts to understand when working with Linux systems. They control who can read, modify, or execute files and who can access directories.
+</p>
+
+<div class="article-intro">
+
+<p>
+<strong>In this guide:</strong> Learn Linux permissions from the basics, including <strong>read, write, execute</strong>, user/group/others, <strong>chmod</strong>, <strong>chown</strong>, <strong>chgrp</strong>, numeric permissions such as <strong>755 and 644</strong>, directory permissions, and practical examples.
+</p>
+
+</div>
+
+
+<!-- TABLE OF CONTENTS -->
+
+<div class="toc">
+
+<h3>Table of Contents</h3>
+
+<ul>
+
+<li><a href="#what">What Are Linux File Permissions?</a></li>
+
+<li><a href="#check">How to Check File Permissions</a></li>
+
+<li><a href="#read-permissions">Understanding the Permission String</a></li>
+
+<li><a href="#rwx">Read, Write and Execute</a></li>
+
+<li><a href="#ugo">User, Group and Others</a></li>
+
+<li><a href="#numeric">Numeric Permissions</a></li>
+
+<li><a href="#chmod">chmod Command</a></li>
+
+<li><a href="#symbolic">Symbolic Permissions</a></li>
+
+<li><a href="#chown">chown Command</a></li>
+
+<li><a href="#chgrp">chgrp Command</a></li>
+
+<li><a href="#directory">Directory Permissions</a></li>
+
+<li><a href="#examples">Practical Examples</a></li>
+
+<li><a href="#errors">Permission Denied</a></li>
+
+<li><a href="#777">Why Avoid chmod 777?</a></li>
+
+<li><a href="#cheatsheet">Quick Cheat Sheet</a></li>
+
+<li><a href="#faq">Frequently Asked Questions</a></li>
+
+</ul>
+
+</div>
+
+
+<!-- SECTION -->
+
+<h2 id="what">What Are Linux File Permissions?</h2>
+
+<p>
+Linux is a multi-user operating system. Different users and programs can work on the same computer or server, so Linux needs a way to control access to files and directories.
+</p>
+
+<p>
+This is where <strong>file permissions</strong> are used.
+</p>
+
+<p>
+Permissions determine whether a particular user can:
+</p>
+
+<ul>
+
+<li>Read a file</li>
+
+<li>Modify a file</li>
+
+<li>Execute a file</li>
+
+<li>Access or traverse a directory</li>
+
+</ul>
+
+<p>
+Linux permissions are mainly divided into three categories:
+</p>
+
+<ul>
+
+<li><strong>User</strong> – the owner of the file</li>
+
+<li><strong>Group</strong> – users belonging to the file's group</li>
+
+<li><strong>Others</strong> – everyone else</li>
+
+</ul>
+
+
+<h2 id="check">How to Check File Permissions</h2>
+
+<p>
+The most common command used to view Linux file permissions is:
+</p>
+
+<pre><code>ls -l</code></pre>
+
+<p>
+For example:
+</p>
+
+<pre><code>ls -l notes.txt</code></pre>
+
+<p>
+You may see something similar to:
+</p>
+
+<pre><code>-rw-r--r-- 1 anu devops 1200 Aug 8 10:30 notes.txt</code></pre>
+
+<p>
+The first part, <strong>-rw-r--r--</strong>, contains the file type and permissions.
+</p>
+
+
+<h2 id="read-permissions">Understanding the Permission String</h2>
+
+<p>
+Consider the following permission string:
+</p>
+
+<pre><code>-rwxr-xr--</code></pre>
+
+<p>
+It can be divided into four parts:
+</p>
+
+<pre><code>-   rwx   r-x   r--
+|    |     |     |
+|    |     |     └── Others
+|    |     └──────── Group
+|    └────────────── Owner
+└─────────────────── File type</code></pre>
+
+<h3>First Character – File Type</h3>
+
+<p>
+The first character identifies the type of filesystem object.
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>-</td>
+<td>Regular file</td>
+</tr>
+
+<tr>
+<td>d</td>
+<td>Directory</td>
+</tr>
+
+<tr>
+<td>l</td>
+<td>Symbolic link</td>
+</tr>
+
+</table>
+
+</div>
+
+<p>
+For example:
+</p>
+
+<pre><code>-rw-r--r--</code></pre>
+
+<p>
+The first <strong>-</strong> indicates that it is a regular file.
+</p>
+
+<p>
+A directory may look like:
+</p>
+
+<pre><code>drwxr-xr-x</code></pre>
+
+
+<h2 id="rwx">Read, Write and Execute Permissions</h2>
+
+<p>
+Linux uses three basic permissions:
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Permission</th>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>Read</td>
+<td>r</td>
+<td>Read or view contents</td>
+</tr>
+
+<tr>
+<td>Write</td>
+<td>w</td>
+<td>Modify contents</td>
+</tr>
+
+<tr>
+<td>Execute</td>
+<td>x</td>
+<td>Execute a program or traverse a directory</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>Read Permission – r</h3>
+
+<p>
+Read permission allows a user to read the contents of a file.
+</p>
+
+<pre><code>r--</code></pre>
+
+<p>
+For a directory, read permission allows the user to list directory entries, subject to the other permissions involved.
+</p>
+
+
+<h3>Write Permission – w</h3>
+
+<p>
+Write permission allows modification of a file.
+</p>
+
+<pre><code>-w-</code></pre>
+
+<p>
+For a directory, write permission allows entries to be created, deleted, or renamed when the necessary directory permissions are present.
+</p>
+
+
+<h3>Execute Permission – x</h3>
+
+<p>
+Execute permission allows an executable program or script to be run.
+</p>
+
+<pre><code>--x</code></pre>
+
+<p>
+For directories, execute permission allows traversal through the directory.
+</p>
+
+
+<h2 id="ugo">User, Group and Others</h2>
+
+<p>
+Linux permissions are applied to three categories.
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Category</th>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>User</td>
+<td>u</td>
+<td>File owner</td>
+</tr>
+
+<tr>
+<td>Group</td>
+<td>g</td>
+<td>Members of the file's group</td>
+</tr>
+
+<tr>
+<td>Others</td>
+<td>o</td>
+<td>Everyone else</td>
+</tr>
+
+</table>
+
+</div>
+
+<p>
+For example:
+</p>
+
+<pre><code>-rwxr-x---</code></pre>
+
+<p>
+This means:
+</p>
+
+<ul>
+
+<li>Owner → read, write and execute</li>
+
+<li>Group → read and execute</li>
+
+<li>Others → no permissions</li>
+
+</ul>
+
+
+<h2 id="numeric">Linux Numeric Permissions</h2>
+
+<p>
+Linux permissions can also be represented using numbers.
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Permission</th>
+<th>Value</th>
+</tr>
+
+<tr>
+<td>Read (r)</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>Write (w)</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>Execute (x)</td>
+<td>1</td>
+</tr>
+
+</table>
+
+</div>
+
+<p>
+The values are added together to create a permission number.
+</p>
+
+<pre><code>r-- = 4
+
+-w- = 2
+
+--x = 1
+
+rw- = 4 + 2 = 6
+
+r-x = 4 + 1 = 5
+
+rwx = 4 + 2 + 1 = 7</code></pre>
+
+
+<h3>Common Permission Values</h3>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Number</th>
+<th>Permission</th>
+</tr>
+
+<tr>
+<td>0</td>
+<td>---</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>--x</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>-w-</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>-wx</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>r--</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>r-x</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>rw-</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>rwx</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h2 id="chmod">chmod Command</h2>
+
+<p>
+<strong>chmod</strong> means "change mode". It is used to change the permissions of files and directories.
+</p>
+
+<p>
+Basic syntax:
+</p>
+
+<pre><code>chmod [permissions] [file]</code></pre>
+
+<p>
+Example:
+</p>
+
+<pre><code>chmod 755 script.sh</code></pre>
+
+<p>
+This changes the permissions of <strong>script.sh</strong>.
+</p>
+
+
+<h3>What Does chmod 755 Mean?</h3>
+
+<p>
+The three numbers represent:
+</p>
+
+<pre><code>Owner   Group   Others
+  7       5       5</code></pre>
+
+<p>
+Now calculate them:
+</p>
+
+<pre><code>7 = rwx
+
+5 = r-x
+
+5 = r-x</code></pre>
+
+<p>
+Therefore:
+</p>
+
+<pre><code>755 = rwxr-xr-x</code></pre>
+
+<p>
+The owner has read, write and execute permissions. Group and others have read and execute permissions.
+</p>
+
+
+<h3>What Does chmod 644 Mean?</h3>
+
+<pre><code>chmod 644 file.txt</code></pre>
+
+<p>
+The permission breakdown is:
+</p>
+
+<pre><code>6 = rw-
+
+4 = r--
+
+4 = r--</code></pre>
+
+<p>
+Therefore:
+</p>
+
+<pre><code>644 = rw-r--r--</code></pre>
+
+<p>
+The owner can read and modify the file, while group and others can read it.
+</p>
+
+
+<h2 id="symbolic">Symbolic chmod</h2>
+
+<p>
+Instead of numbers, you can use symbolic permissions.
+</p>
+
+<p>
+For example, to add execute permission for the owner:
+</p>
+
+<pre><code>chmod u+x script.sh</code></pre>
+
+<p>
+To add write permission for the group:
+</p>
+
+<pre><code>chmod g+w file.txt</code></pre>
+
+<p>
+To remove write permission from others:
+</p>
+
+<pre><code>chmod o-w file.txt</code></pre>
+
+<p>
+The commonly used operators are:
+</p>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+</tr>
+
+<tr>
+<td>+</td>
+<td>Add permission</td>
+</tr>
+
+<tr>
+<td>-</td>
+<td>Remove permission</td>
+</tr>
+
+<tr>
+<td>=</td>
+<td>Set exact permission</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>Examples</h3>
+
+<pre><code>chmod u+x script.sh
+
+chmod g-w file.txt
+
+chmod o=r file.txt
+
+chmod a+r file.txt</code></pre>
+
+<p>
+Here, <strong>a</strong> means all users.
+</p>
+
+
+<h2 id="chown">chown Command</h2>
+
+<p>
+Permissions and ownership are related but different concepts.
+</p>
+
+<p>
+The <strong>chown</strong> command changes the owner of a file or directory.
+</p>
+
+<p>
+Example:
+</p>
+
+<pre><code>sudo chown anu notes.txt</code></pre>
+
+<p>
+You can change both the owner and group:
+</p>
+
+<pre><code>sudo chown anu:devops notes.txt</code></pre>
+
+<p>
+After this command:
+</p>
+
+<pre><code>Owner = anu
+Group = devops</code></pre>
+
+
+<h2 id="chgrp">chgrp Command</h2>
+
+<p>
+The <strong>chgrp</strong> command changes the group associated with a file.
+</p>
+
+<pre><code>sudo chgrp developers project.txt</code></pre>
+
+<p>
+You can check the result using:
+</p>
+
+<pre><code>ls -l project.txt</code></pre>
+
+
+<h2 id="directory">Linux Directory Permissions</h2>
+
+<p>
+Directory permissions work slightly differently from regular file permissions.
+</p>
+
+<h3>Read – r</h3>
+
+<p>
+Allows a user to list the directory's entries.
+</p>
+
+<h3>Write – w</h3>
+
+<p>
+Allows creation, deletion and renaming of entries when the required permissions are present.
+</p>
+
+<h3>Execute – x</h3>
+
+<p>
+Allows a user to enter or traverse the directory and access entries when the required permissions are satisfied.
+</p>
+
+<div class="tip">
+
+<strong>Tip:</strong> When troubleshooting directory access, remember that a user may need execute permission on every relevant directory in the path to reach a file.
+
+</div>
+
+
+<h2 id="examples">Practical Linux File Permission Example</h2>
+
+<p>
+Suppose you create a shell script:
+</p>
+
+<pre><code>nano backup.sh</code></pre>
+
+<p>
+Check its permissions:
+</p>
+
+<pre><code>ls -l backup.sh</code></pre>
+
+<p>
+You might see:
+</p>
+
+<pre><code>-rw-r--r-- backup.sh</code></pre>
+
+<p>
+The owner does not have execute permission.
+</p>
+
+<p>
+Add execute permission:
+</p>
+
+<pre><code>chmod u+x backup.sh</code></pre>
+
+<p>
+Check again:
+</p>
+
+<pre><code>ls -l backup.sh</code></pre>
+
+<p>
+The result may now look like:
+</p>
+
+<pre><code>-rwxr--r-- backup.sh</code></pre>
+
+<p>
+The owner can now execute the script.
+</p>
+
+
+<h2 id="errors">How to Troubleshoot "Permission Denied"</h2>
+
+<p>
+One of the most common Linux errors is:
+</p>
+
+<pre><code>Permission denied</code></pre>
+
+<p>
+This usually means that the current user or process does not have the required access.
+</p>
+
+<p>
+Start by checking the file:
+</p>
+
+<pre><code>ls -l filename</code></pre>
+
+<p>
+Check:
+</p>
+
+<ul>
+
+<li>Who owns the file?</li>
+
+<li>Which group owns it?</li>
+
+<li>What permissions are assigned?</li>
+
+<li>Does the directory containing it allow traversal?</li>
+
+</ul>
+
+<p>
+For a full path, this command can be helpful:
+</p>
+
+<pre><code>namei -l /path/to/file</code></pre>
+
+<p>
+It shows permissions for each part of the path and can help identify where access is being blocked.
+</p>
+
+
+<h2 id="777">Why You Should Avoid chmod 777</h2>
+
+<p>
+Beginners sometimes use:
+</p>
+
+<pre><code>chmod 777 file</code></pre>
+
+<p>
+This gives:
+</p>
+
+<pre><code>rwxrwxrwx</code></pre>
+
+<p>
+That means the owner, group and others all receive read, write and execute permissions.
+</p>
+
+<div class="warning">
+
+<strong>Security warning:</strong> Do not use <strong>chmod 777</strong> as a general solution for permission problems. It may provide more access than necessary and can create security risks.
+
+</div>
+
+<p>
+Instead, identify which user or process needs access and grant only the permissions required.
+</p>
+
+
+<h2>Why Linux File Permissions Matter in DevOps</h2>
+
+<p>
+File permissions are particularly important in DevOps and cloud environments.
+</p>
+
+<p>
+Linux servers commonly contain:
+</p>
+
+<ul>
+
+<li>Application files</li>
+
+<li>Configuration files</li>
+
+<li>Log files</li>
+
+<li>SSH keys</li>
+
+<li>Deployment scripts</li>
+
+<li>Database credentials</li>
+
+<li>Environment files</li>
+
+</ul>
+
+<p>
+Incorrect permissions can cause deployment failures, application errors and security issues.
+</p>
+
+<p>
+For this reason, understanding Linux permissions is useful when working with technologies such as servers, containers, CI/CD pipelines, cloud platforms and automation tools.
+</p>
+
+
+<h2 id="cheatsheet">Linux File Permissions Cheat Sheet</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+
+<tr>
+<td><code>ls -l</code></td>
+<td>View file permissions and ownership</td>
+</tr>
+
+<tr>
+<td><code>chmod</code></td>
+<td>Change permissions</td>
+</tr>
+
+<tr>
+<td><code>chown</code></td>
+<td>Change owner</td>
+</tr>
+
+<tr>
+<td><code>chgrp</code></td>
+<td>Change group</td>
+</tr>
+
+<tr>
+<td><code>namei -l</code></td>
+<td>Inspect permissions along a path</td>
+</tr>
+
+</table>
+
+</div>
+
+
+<h3>Permission Values</h3>
+
+<pre><code>r = 4
+w = 2
+x = 1</code></pre>
+
+<h3>Common Permission Modes</h3>
+
+<pre><code>644 = rw-r--r--
+
+755 = rwxr-xr-x
+
+700 = rwx------
+
+600 = rw-------</code></pre>
+
+
+<div class="note">
+
+<strong>Remember:</strong>
+
+<br><br>
+
+<strong>chmod</strong> → change permissions
+
+<br>
+
+<strong>chown</strong> → change owner
+
+<br>
+
+<strong>chgrp</strong> → change group
+
+<br>
+
+<strong>ls -l</strong> → view permissions
+
+</div>
+
+
+<!-- DOWNLOAD -->
+
+<div class="download-box">
+
+<h2>Download Linux File Permissions Notes</h2>
+
+<p>
+Want to revise Linux file permissions offline? Download the Linux File Permissions notes from the DevOps with Anu resource library.
+</p>
+
+<a href="linux/Linux_File_Permissions.pdf"
+class="download-btn"
+download>
+Download PDF
+</a>
+
+</div>
+
+
+<!-- FAQ -->
+
+<h2 id="faq">Frequently Asked Questions</h2>
+
+<div class="faq">
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is chmod in Linux?
+</div>
+
+<div class="faq-answer">
+chmod is a Linux command used to change the permissions of files and directories.
+For example, <code>chmod 755 script.sh</code> changes the permissions of the script.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="faq-question">
+What does chmod 755 mean?
+</div>
+
+<div class="faq-answer">
+755 means the owner has read, write and execute permissions, while the group and others have read and execute permissions. The symbolic representation is <code>rwxr-xr-x</code>.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="faq-question">
+What does chmod 644 mean?
+</div>
+
+<div class="faq-answer">
+644 means the owner has read and write permissions, while group and others have read-only permission. Its symbolic representation is <code>rw-r--r--</code>.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="faq-question">
+What is the difference between chmod and chown?
+</div>
+
+<div class="faq-answer">
+chmod changes file or directory permissions, while chown changes the owner. For example, <code>chmod 644 file.txt</code> changes permissions and <code>sudo chown anu file.txt</code> changes ownership.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="faq-question">
+Why does Linux show Permission denied?
+</div>
+
+<div class="faq-answer">
+The current user or process may not have the required permission on the file, directory, or one of the directories in the path. Use <code>ls -l</code> and <code>namei -l</code> to investigate.
+</div>
+
+</div>
+
+
+<div class="faq-item">
+
+<div class="faq-question">
+Is chmod 777 safe?
+</div>
+
+<div class="faq-answer">
+chmod 777 grants read, write and execute permissions to everyone. It should not be used unnecessarily because it can provide excessive access. Use the minimum permissions required instead.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- CONCLUSION -->
+
+<h2>Conclusion</h2>
+
+<p>
+Linux file permissions are a fundamental part of Linux system administration and security.
+</p>
+
+<p>
+The basic permission model consists of:
+</p>
+
+<pre><code>User + Group + Others</code></pre>
+
+<p>
+and the three fundamental permissions are:
+</p>
+
+<pre><code>Read + Write + Execute</code></pre>
+
+<p>
+Once you understand permission strings such as:
+</p>
+
+<pre><code>-rwxr-xr-x</code></pre>
+
+<p>
+and numeric modes such as:
+</p>
+
+<pre><code>755
+644
+600</code></pre>
+
+<p>
+you will be able to understand and manage many common Linux access-control situations.
+</p>
+
+<p>
+The most important commands to remember are:
+</p>
+
+<pre><code>ls -l
+chmod
+chown
+chgrp</code></pre>
+
+<p>
+Practice these commands in a Linux environment and always follow the principle of least privilege: give users and applications only the access they actually need.
+</p>
+
+
+<!-- RELATED -->
+
+<div class="related">
+
+<h2>Explore More Linux Resources</h2>
+
+<p>
+Continue learning Linux with more beginner-friendly notes and practical resources on <strong>DevOps with Anu</strong>.
+</p>
+
+<ul>
+
+<li>
+<a href="linux.html">
+Linux Resources
+</a>
+</li>
+
+<li>
+<a href="index.html">
+Back to DevOps with Anu Home
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</article>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-title">
+DevOps with Anu
+</div>
+
+<p>
+Simple and practical resources for Linux, Networking, DevOps and programming.
+</p>
+
+<p>
+
+<a href="index.html">Home</a>
+
+<a href="linux.html">Linux</a>
+
+<a href="python.html">Python</a>
+
+</p>
+
+<div class="footer-copy">
+
+© 2026 DevOps with Anu. All rights reserved.
+
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>
